@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ifc-slab-mesh — IFC Slab Triangulator</title>
+<title>ifc-slab-mesh — IFC Slab CDT Triangulator</title>
 <meta name="description" content="Constrained triangulation of IFC slab footprints with opening subtraction. Python library and CLI — 201,810 triangles/s." />
 <meta property="og:title" content="ifc-slab-mesh" />
 <meta property="og:description" content="Constrained Delaunay triangulation of IFC slab footprints with opening subtraction." />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/earcut/2.2.4/earcut.min.js"></script>
+<!-- earcut loaded from jsdelivr; fallback triangulator inlined below -->
+<script src="https://cdn.jsdelivr.net/npm/earcut@2.2.4/dist/earcut.min.js"></script>
 <style>
 :root {
   --bg:       #0d1117;
@@ -35,8 +36,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-/* ── Header ── */
 header {
   border-bottom: 1px solid var(--border);
   background: var(--surface);
@@ -63,27 +62,12 @@ header {
   border-radius: 4px;
   padding: 1px 7px;
 }
-.header-links {
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+.header-links { margin-left: auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid var(--border);
-  color: var(--text);
-  background: transparent;
-  cursor: pointer;
-  transition: border-color .15s, background .15s;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500;
+  text-decoration: none; border: 1px solid var(--border); color: var(--text);
+  background: transparent; cursor: pointer; transition: border-color .15s, background .15s;
 }
 .pill:hover { border-color: var(--accent); background: rgba(68,147,248,.08); }
 .pill.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -92,83 +76,34 @@ header {
 .badge-live::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
 
-/* ── Hero ── */
-.hero {
-  padding: 36px 24px 28px;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-}
-.hero h1 {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
+.hero { padding: 36px 24px 28px; max-width: 900px; margin: 0 auto; width: 100%; }
+.hero h1 { font-size: clamp(1.4rem,4vw,2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 10px; }
 .hero h1 span { color: var(--accent); }
-.hero p {
-  color: var(--muted);
-  font-size: 0.95rem;
-  max-width: 560px;
-}
-.stat-strip {
-  display: flex;
-  gap: 24px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
+.hero p { color: var(--muted); font-size: 0.95rem; max-width: 560px; }
+.stat-strip { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
 .stat-item { display:flex;flex-direction:column;gap:1px; }
 .stat-val { font-size:1.15rem;font-weight:700;font-family:var(--mono);color:var(--accent2); }
 .stat-lbl { font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em; }
 
-/* ── Main layout ── */
-main {
-  flex: 1;
-  padding: 0 24px 48px;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-}
+main { flex: 1; padding: 0 24px 48px; max-width: 900px; margin: 0 auto; width: 100%; }
 
-/* ── Demo presets ── */
-.presets {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-  align-items: center;
-}
+.presets { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
 .preset-btn {
-  padding: 6px 14px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: all .15s;
+  padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--muted); font-size: 0.82rem;
+  cursor: pointer; transition: all .15s;
 }
 .preset-btn:hover { border-color: var(--accent); color: var(--text); }
 .preset-btn.active { border-color: var(--accent); background: rgba(68,147,248,.12); color: var(--accent2); }
 .upload-label {
-  margin-left: auto;
-  padding: 6px 14px;
-  border-radius: 6px;
-  border: 1px dashed var(--border);
-  background: transparent;
-  color: var(--muted);
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: all .15s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  margin-left: auto; padding: 6px 14px; border-radius: 6px;
+  border: 1px dashed var(--border); background: transparent; color: var(--muted);
+  font-size: 0.82rem; cursor: pointer; transition: all .15s;
+  display: inline-flex; align-items: center; gap: 6px;
 }
 .upload-label:hover { border-color: var(--accent); color: var(--text); }
 #ifc-upload { display: none; }
 
-/* ── Canvas + sidebar ── */
 .demo-area {
   display: grid;
   grid-template-columns: 1fr 220px;
@@ -177,185 +112,82 @@ main {
 }
 @media (max-width: 640px) {
   .demo-area { grid-template-columns: 1fr; }
+  .header-links { width: 100%; }
 }
 .canvas-wrap {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; position: relative;
 }
-#mesh-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  image-rendering: pixelated;
-}
+#mesh-canvas { display: block; width: 100%; height: auto; }
 .canvas-label {
-  position: absolute;
-  bottom: 10px;
-  left: 12px;
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-family: var(--mono);
-  pointer-events: none;
+  position: absolute; bottom: 10px; left: 12px;
+  font-size: 0.72rem; color: var(--muted); font-family: var(--mono); pointer-events: none;
 }
-.view-toggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  gap: 4px;
-}
+.view-toggle { position: absolute; top: 10px; right: 10px; display: flex; gap: 4px; }
 .view-btn {
-  padding: 3px 9px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: rgba(13,17,23,.8);
-  color: var(--muted);
-  font-size: 0.72rem;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
+  padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border);
+  background: rgba(13,17,23,.85); color: var(--muted); font-size: 0.72rem;
+  cursor: pointer; backdrop-filter: blur(4px); transition: all .15s;
 }
+.view-btn:hover { color: var(--text); border-color: var(--muted); }
 .view-btn.active { border-color: var(--accent); color: var(--accent2); }
 
-/* ── Sidebar stats ── */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-}
-.stat-card-title {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.stat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 4px 0;
-  border-bottom: 1px solid rgba(48,54,61,.5);
-  gap: 8px;
-}
+.sidebar { display: flex; flex-direction: column; gap: 12px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.stat-card-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; border-bottom: 1px solid rgba(48,54,61,.5); gap: 8px; }
 .stat-row:last-child { border-bottom: none; }
 .stat-row-key { font-size: 0.78rem; color: var(--muted); }
 .stat-row-val { font-size: 0.82rem; font-family: var(--mono); color: var(--text); font-weight: 600; }
 .stat-row-val.good { color: var(--success); }
 .stat-row-val.warn { color: var(--warn); }
-
-/* quality bar */
 .qual-bar-wrap { margin-top: 6px; }
 .qual-bar-bg { background: var(--border); border-radius: 3px; height: 5px; overflow: hidden; }
 .qual-bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
 
-/* ── Legend ── */
-.legend {
-  display: flex;
-  gap: 16px;
-  margin: 12px 0;
-  flex-wrap: wrap;
-}
+.legend { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
 .legend-item { display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--muted); }
 .legend-swatch { width:12px;height:12px;border-radius:2px;border:1px solid rgba(255,255,255,.15); }
 
-/* ── Code snippet ── */
-.code-block {
-  margin-top: 28px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
+.code-block { margin-top: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .code-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface2);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--surface2);
 }
 .code-header-title { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
 .copy-btn {
-  padding: 3px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--muted);
-  font-size: 0.72rem;
-  cursor: pointer;
-  transition: all .15s;
+  padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted); font-size: 0.72rem; cursor: pointer; transition: all .15s;
 }
 .copy-btn:hover { border-color: var(--accent); color: var(--text); }
-pre {
-  padding: 16px;
-  font-family: var(--mono);
-  font-size: 0.82rem;
-  line-height: 1.65;
-  overflow-x: auto;
-  tab-size: 4;
-}
-.kw  { color: #ff7b72; }
-.fn  { color: #d2a8ff; }
-.st  { color: #a5d6ff; }
-.cm  { color: #8b949e; font-style: italic; }
-.nu  { color: #79c0ff; }
+pre { padding: 16px; font-family: var(--mono); font-size: 0.82rem; line-height: 1.65; overflow-x: auto; tab-size: 4; }
+.kw { color: #ff7b72; } .fn { color: #d2a8ff; } .st { color: #a5d6ff; }
+.cm { color: #8b949e; font-style: italic; } .nu { color: #79c0ff; }
 
-/* ── ADR link ── */
 .adr-strip {
-  margin-top: 20px;
-  padding: 14px 16px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.82rem;
-  flex-wrap: wrap;
+  margin-top: 20px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); display: flex; align-items: center; gap: 12px; font-size: 0.82rem; flex-wrap: wrap;
 }
 .adr-strip svg { color: var(--accent); flex-shrink: 0; }
 .adr-strip a { color: var(--accent2); text-decoration: none; }
 .adr-strip a:hover { text-decoration: underline; }
 .adr-muted { color: var(--muted); }
 
-/* ── Footer ── */
 footer {
-  border-top: 1px solid var(--border);
-  padding: 16px 24px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.76rem;
-  color: var(--muted);
+  border-top: 1px solid var(--border); padding: 16px 24px;
+  display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; font-size: 0.76rem; color: var(--muted);
 }
 footer a { color: var(--muted); text-decoration: none; }
 footer a:hover { color: var(--text); }
 
-/* ── Upload feedback ── */
-.upload-feedback {
-  font-size: 0.78rem;
-  color: var(--muted);
-  padding: 4px 0;
-  min-height: 20px;
-}
+.upload-feedback { font-size: 0.78rem; color: var(--muted); padding: 4px 0; min-height: 20px; }
 .upload-feedback.ok  { color: var(--success); }
 .upload-feedback.err { color: var(--danger); }
 </style>
 </head>
 <body>
 
-<!-- ── Header ── -->
 <header>
   <a class="logo" href="https://github.com/daudee215/ifc-slab-mesh" target="_blank" rel="noopener">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -375,7 +207,6 @@ footer a:hover { color: var(--text); }
   </div>
 </header>
 
-<!-- ── Hero ── -->
 <div class="hero">
   <h1>IFC slab <span>CDT</span> triangulator</h1>
   <p>Parses <code>IfcSlab</code> footprints, subtracts <code>IfcOpeningElement</code> voids, and produces quality-constrained Delaunay meshes via Shewchuk's <em>triangle</em> library. Python API and CLI.</p>
@@ -387,7 +218,6 @@ footer a:hover { color: var(--text); }
   </div>
 </div>
 
-<!-- ── Demo ── -->
 <main>
   <div class="presets">
     <button class="preset-btn active" data-idx="0">Simple slab</button>
@@ -405,7 +235,7 @@ footer a:hover { color: var(--text); }
   <div class="demo-area">
     <div class="canvas-wrap">
       <canvas id="mesh-canvas" width="660" height="420"></canvas>
-      <div class="canvas-label" id="canvas-label">earcut CDT • browser preview</div>
+      <div class="canvas-label" id="canvas-label">loading…</div>
       <div class="view-toggle">
         <button class="view-btn active" data-view="mesh">Mesh</button>
         <button class="view-btn" data-view="boundary">Outline</button>
@@ -447,13 +277,12 @@ footer a:hover { color: var(--text); }
     <div class="legend-item" id="legend-quality" style="display:none"><div class="legend-swatch" style="background:linear-gradient(90deg,#3fb950,#d29922,#f85149)"></div> Quality (green=good)</div>
   </div>
 
-  <!-- ── Code snippet ── -->
   <div class="code-block">
     <div class="code-header">
       <span class="code-header-title">Python · ifc_slab_mesh</span>
       <button class="copy-btn" id="copy-btn">Copy</button>
     </div>
-    <pre id="code-pre"><span class="kw">from</span> ifc_slab_mesh <span class="kw">import</span> <span class="fn">triangulate_ifc_file</span>
+    <pre><span class="kw">from</span> ifc_slab_mesh <span class="kw">import</span> <span class="fn">triangulate_ifc_file</span>
 
 <span class="cm"># Parse slabs, subtract openings, run CDT</span>
 result = <span class="fn">triangulate_ifc_file</span>(<span class="st">"building.ifc"</span>)
@@ -465,7 +294,6 @@ result = <span class="fn">triangulate_ifc_file</span>(<span class="st">"building
 <span class="cm"># ifc-slab-mesh building.ifc -o ./meshes --format obj</span></pre>
   </div>
 
-  <!-- ── ADR strip ── -->
   <div class="adr-strip">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     <div>
@@ -475,380 +303,326 @@ result = <span class="fn">triangulate_ifc_file</span>(<span class="st">"building
   </div>
 </main>
 
-<!-- ── Footer ── -->
 <footer>
   <span>ifc-slab-mesh v0.1.0 · MIT License · <a href="https://github.com/daudee215/ifc-slab-mesh" target="_blank" rel="noopener">github.com/daudee215/ifc-slab-mesh</a></span>
-  <span>Built by <a href="https://daudee.com" target="_blank" rel="noopener">Daud Tasleem</a> · <a href="https://daudee.com/#tools" target="_blank" rel="noopener">More tools</a></span>
+  <span>Built by <a href="https://daudee.com" target="_blank" rel="noopener">Muhammad Daud Tasleem</a> · <a href="https://daudee.com/#tools" target="_blank" rel="noopener">More tools</a></span>
 </footer>
 
 <script>
 'use strict';
 
-/* ── Demo geometry definitions (units: metres) ── */
-const DEMOS = [
-  {
-    name: 'Simple 10×6 m slab',
-    boundary: [[0,0],[10,0],[10,6],[0,6]],
-    holes: [],
-    area: 60,
-    openings: 0
-  },
-  {
-    name: '8×5 m slab + 2×2 m opening',
-    boundary: [[0,0],[8,0],[8,5],[0,5]],
-    holes: [[[3,2],[5,2],[5,4],[3,4]]],
-    area: 36,
-    openings: 1
-  },
-  {
-    name: 'L-shaped slab (12 m²)',
-    boundary: [[0,0],[4,0],[4,2],[2,2],[2,4],[0,4]],
-    holes: [],
-    area: 12,
-    openings: 0
-  },
-  {
-    name: 'Complex slab + 4 voids',
-    boundary: [[0,0],[14,0],[14,8],[10,8],[10,10],[0,10]],
-    holes: [
-      [[1,1],[3,1],[3,3],[1,3]],
-      [[5,1],[7,1],[7,3],[5,3]],
-      [[9,1],[11,1],[11,3],[9,3]],
-      [[2,6],[6,6],[6,9],[2,9]]
-    ],
-    area: 106,
-    openings: 4
+/* ── Inline fallback ear-clip triangulator (no CDN dependency) ─────────── */
+(function() {
+  function cross(o, a, b) {
+    return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0]);
   }
+  function ptInTri(p, a, b, c) {
+    var d1=cross(a,b,p), d2=cross(b,c,p), d3=cross(c,a,p);
+    return !((d1<0||d2<0||d3<0) && (d1>0||d2>0||d3>0));
+  }
+  function shoelace(pts) {
+    var s=0; for(var i=0,j=pts.length-1;i<pts.length;j=i++) s+=(pts[j][0]-pts[i][0])*(pts[j][1]+pts[i][1]); return s/2;
+  }
+  function mergeBridge(ring, hole) {
+    // Find rightmost hole vertex
+    var hIdx=0;
+    for(var i=1;i<hole.length;i++) if(hole[i][0]>hole[hIdx][0]) hIdx=i;
+    var hx=hole[hIdx][0];
+    // Find ring vertex: rightmost overall (reliable for all demo shapes)
+    var best=0;
+    for(var i=1;i<ring.length;i++) if(ring[i][0]>ring[best][0]) best=i;
+    // Try to find a ring vertex at x > hx with closest y
+    var cands=[];
+    for(var i=0;i<ring.length;i++) if(ring[i][0]>=hx) cands.push(i);
+    if(cands.length) {
+      var hy=hole[hIdx][1];
+      best=cands.reduce(function(b,i){
+        return Math.abs(ring[i][1]-hy)<Math.abs(ring[b][1]-hy)?i:b;
+      }, cands[0]);
+    }
+    var rotH=hole.slice(hIdx).concat(hole.slice(0,hIdx)).concat([hole[hIdx]]);
+    return ring.slice(0,best+1).concat(rotH).concat(ring.slice(best));
+  }
+  function earClip(pts) {
+    if(pts.length<3) return [];
+    var idx=pts.map(function(_,i){return i;}), tris=[], guard=idx.length*idx.length+10;
+    while(idx.length>3 && guard-->0) {
+      var found=-1;
+      for(var i=0;i<idx.length;i++) {
+        var n=idx.length;
+        var a=pts[idx[(i-1+n)%n]], b=pts[idx[i]], c=pts[idx[(i+1)%n]];
+        if(cross(a,b,c)<=0) continue;
+        var ear=true;
+        for(var j=0;j<idx.length;j++) {
+          if(j===(i-1+n)%n||j===i||j===(i+1)%n) continue;
+          if(ptInTri(pts[idx[j]],a,b,c)){ear=false;break;}
+        }
+        if(ear){found=i;break;}
+      }
+      if(found<0) break;
+      var n=idx.length;
+      tris.push([pts[idx[(found-1+n)%n]],pts[idx[found]],pts[idx[(found+1)%n]]]);
+      idx.splice(found,1);
+    }
+    if(idx.length===3) tris.push([pts[idx[0]],pts[idx[1]],pts[idx[2]]]);
+    return tris;
+  }
+  window._fallbackTriangulate = function(boundary, holes) {
+    var ring = boundary.slice();
+    if(shoelace(ring)<0) ring.reverse(); // ensure CCW
+    for(var h=0;h<holes.length;h++) {
+      var hole=holes[h].slice();
+      if(shoelace(hole)>0) hole.reverse(); // ensure CW
+      ring=mergeBridge(ring, hole);
+    }
+    return earClip(ring);
+  };
+})();
+
+/* ── Demo geometry (metres) ── */
+var DEMOS = [
+  { name: 'Simple 10×6 m slab',
+    boundary: [[0,0],[10,0],[10,6],[0,6]], holes: [], area: 60, openings: 0 },
+  { name: '8×5 m slab + 2×2 m opening',
+    boundary: [[0,0],[8,0],[8,5],[0,5]], holes: [[[3,2],[5,2],[5,4],[3,4]]], area: 36, openings: 1 },
+  { name: 'L-shaped slab (12 m²)',
+    boundary: [[0,0],[4,0],[4,2],[2,2],[2,4],[0,4]], holes: [], area: 12, openings: 0 },
+  { name: 'Complex slab + 4 voids',
+    boundary: [[0,0],[14,0],[14,8],[10,8],[10,10],[0,10]],
+    holes: [[[1,1],[3,1],[3,3],[1,3]],[[5,1],[7,1],[7,3],[5,3]],[[9,1],[11,1],[11,3],[9,3]],[[2,6],[6,6],[6,9],[2,9]]],
+    area: 106, openings: 4 }
 ];
 
 /* ── State ── */
-let currentDemo = DEMOS[0];
-let currentView = 'mesh';
-let triangles   = [];
-let allVerts    = [];
-let animFrame   = null;
-let animProg    = 0;
+var currentDemo = DEMOS[0];
+var currentView = 'mesh';
+var triangles   = [];
+var animFrame   = null;
+var animProg    = 0;
 
-/* ── Triangulation using earcut ── */
-function buildEarcutInput(boundary, holes) {
-  const verts = [];
-  const holeIdx = [];
-  for (const [x,y] of boundary) verts.push(x, y);
-  for (const hole of holes) {
-    holeIdx.push(verts.length / 2);
-    for (const [x,y] of hole) verts.push(x, y);
+/* ── Triangulation (earcut if available, fallback otherwise) ── */
+function doTriangulate(demo) {
+  // Try earcut first (CDN)
+  if (typeof earcut === 'function') {
+    var verts = [], holeIdx = [];
+    for (var i=0;i<demo.boundary.length;i++) { verts.push(demo.boundary[i][0], demo.boundary[i][1]); }
+    for (var h=0;h<demo.holes.length;h++) {
+      holeIdx.push(verts.length/2);
+      for (var i=0;i<demo.holes[h].length;i++) { verts.push(demo.holes[h][i][0], demo.holes[h][i][1]); }
+    }
+    var idx = earcut(verts, holeIdx.length ? holeIdx : null, 2);
+    var tris = [];
+    for (var i=0;i<idx.length;i+=3) {
+      tris.push([[verts[idx[i]*2],verts[idx[i]*2+1]],[verts[idx[i+1]*2],verts[idx[i+1]*2+1]],[verts[idx[i+2]*2],verts[idx[i+2]*2+1]]]);
+    }
+    return tris;
   }
-  return { verts, holeIdx };
-}
-
-function triangulate(demo) {
-  const { verts, holeIdx } = buildEarcutInput(demo.boundary, demo.holes);
-  const idx = earcut(verts, holeIdx.length ? holeIdx : null, 2);
-  const tris = [];
-  for (let i = 0; i < idx.length; i += 3) {
-    tris.push([
-      [verts[idx[i]*2],   verts[idx[i]*2+1]],
-      [verts[idx[i+1]*2], verts[idx[i+1]*2+1]],
-      [verts[idx[i+2]*2], verts[idx[i+2]*2+1]]
-    ]);
-  }
-  return { tris, verts };
+  // Fallback inline triangulator
+  return window._fallbackTriangulate(demo.boundary, demo.holes);
 }
 
 /* ── Quality metrics ── */
 function triMinAngle(tri) {
-  const [[ax,ay],[bx,by],[cx,cy]] = tri;
-  const a = Math.hypot(cx-bx, cy-by);
-  const b = Math.hypot(cx-ax, cy-ay);
-  const c = Math.hypot(bx-ax, by-ay);
-  const A = Math.acos(Math.max(-1, Math.min(1, (b*b+c*c-a*a)/(2*b*c))));
-  const B = Math.acos(Math.max(-1, Math.min(1, (a*a+c*c-b*b)/(2*a*c))));
-  const C = Math.PI - A - B;
-  return Math.min(A, B, C) * 180 / Math.PI;
-}
-
-function qualityColor(angle, alpha=0.22) {
-  // green (≥30°) → yellow (20°) → red (<15°)
-  const t = Math.min(1, Math.max(0, (angle - 10) / 25));
-  const r = Math.round(63 + (1-t)*185);
-  const g = Math.round(t > 0.5 ? 185 : t*2*185);
-  const b = 80;
-  return `rgba(${r},${g},${b},${alpha})`;
+  var ax=tri[0][0],ay=tri[0][1], bx=tri[1][0],by=tri[1][1], cx=tri[2][0],cy=tri[2][1];
+  var a=Math.hypot(cx-bx,cy-by), b=Math.hypot(cx-ax,cy-ay), c=Math.hypot(bx-ax,by-ay);
+  if(a<1e-12||b<1e-12||c<1e-12) return 0;
+  var A=Math.acos(Math.max(-1,Math.min(1,(b*b+c*c-a*a)/(2*b*c))));
+  var B=Math.acos(Math.max(-1,Math.min(1,(a*a+c*c-b*b)/(2*a*c))));
+  return Math.min(A, B, Math.PI-A-B) * 180 / Math.PI;
 }
 
 /* ── Viewport transform ── */
-function makeTransform(demo, W, H, pad=40) {
-  const pts = [demo.boundary, ...demo.holes].flat();
-  const xs = pts.map(p=>p[0]), ys = pts.map(p=>p[1]);
-  const minX=Math.min(...xs), maxX=Math.max(...xs);
-  const minY=Math.min(...ys), maxY=Math.max(...ys);
-  const dw = maxX-minX || 1, dh = maxY-minY || 1;
-  const scale = Math.min((W-pad*2)/dw, (H-pad*2)/dh);
-  const ox = (W - dw*scale)/2 - minX*scale;
-  const oy = (H - dh*scale)/2 - minY*scale;
-  return ([x,y]) => [x*scale+ox, H - (y*scale+oy)]; // flip Y for canvas
+function makeTransform(demo, W, H) {
+  var pad=44;
+  var pts = demo.boundary.concat(demo.holes.reduce(function(a,h){return a.concat(h);},[]));
+  var xs=pts.map(function(p){return p[0];}), ys=pts.map(function(p){return p[1];});
+  var minX=Math.min.apply(null,xs), maxX=Math.max.apply(null,xs);
+  var minY=Math.min.apply(null,ys), maxY=Math.max.apply(null,ys);
+  var dw=maxX-minX||1, dh=maxY-minY||1;
+  var scale=Math.min((W-pad*2)/dw,(H-pad*2)/dh);
+  var ox=(W-dw*scale)/2-minX*scale;
+  var oy=(H-dh*scale)/2-minY*scale;
+  return function(p){ return [p[0]*scale+ox, H-(p[1]*scale+oy)]; };
 }
 
 /* ── Draw ── */
 function draw() {
-  const canvas = document.getElementById('mesh-canvas');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const demo = currentDemo;
+  var canvas=document.getElementById('mesh-canvas');
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width, H=canvas.height;
+  var demo=currentDemo;
 
-  ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#161b22';
-  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle='#161b22';
+  ctx.fillRect(0,0,W,H);
 
-  const pt = makeTransform(demo, W, H);
-  const n = Math.ceil(triangles.length * animProg);
+  if (!demo || triangles.length===0) return;
 
-  if (currentView !== 'boundary') {
-    // Draw triangles
-    for (let i = 0; i < n; i++) {
-      const tri = triangles[i];
-      const [a, b, c] = tri.map(pt);
-      const ang = triMinAngle(tri);
+  var pt=makeTransform(demo,W,H);
+  var n=Math.ceil(triangles.length*animProg);
 
-      let fillColor, strokeColor;
-      if (currentView === 'quality') {
-        fillColor  = qualityColor(ang, 0.4);
-        strokeColor = qualityColor(ang, 0.9);
+  if (currentView!=='boundary') {
+    for (var i=0;i<n;i++) {
+      var tri=triangles[i];
+      var a=pt(tri[0]), b=pt(tri[1]), c=pt(tri[2]);
+      var ang=triMinAngle(tri);
+      var fill,stroke;
+      if (currentView==='quality') {
+        var t=Math.min(1,Math.max(0,(ang-10)/25));
+        var r=Math.round(248-t*180), g=Math.round(t>0.5?185:(t*2*185)), bl=80;
+        fill='rgba('+r+','+g+','+bl+',0.35)';
+        stroke='rgba('+r+','+g+','+bl+',0.8)';
       } else {
-        fillColor  = 'rgba(68,147,248,0.13)';
-        strokeColor = 'rgba(68,147,248,0.55)';
+        fill='rgba(68,147,248,0.14)'; stroke='rgba(68,147,248,0.55)';
       }
-
       ctx.beginPath();
-      ctx.moveTo(a[0], a[1]);
-      ctx.lineTo(b[0], b[1]);
-      ctx.lineTo(c[0], c[1]);
-      ctx.closePath();
-      ctx.fillStyle = fillColor;
-      ctx.fill();
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = 0.9;
-      ctx.stroke();
+      ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.lineTo(c[0],c[1]); ctx.closePath();
+      ctx.fillStyle=fill; ctx.fill();
+      ctx.strokeStyle=stroke; ctx.lineWidth=0.9; ctx.stroke();
     }
   }
 
-  // Draw boundary
-  function drawPoly(verts, color, width, fillColor) {
-    const mapped = verts.map(pt);
+  function drawPoly(verts,color,width,fillColor) {
+    var m=verts.map(pt);
     ctx.beginPath();
-    ctx.moveTo(mapped[0][0], mapped[0][1]);
-    for (let i=1;i<mapped.length;i++) ctx.lineTo(mapped[i][0], mapped[i][1]);
+    ctx.moveTo(m[0][0],m[0][1]);
+    for(var i=1;i<m.length;i++) ctx.lineTo(m[i][0],m[i][1]);
     ctx.closePath();
-    if (fillColor) { ctx.fillStyle = fillColor; ctx.fill(); }
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.stroke();
+    if(fillColor){ctx.fillStyle=fillColor;ctx.fill();}
+    ctx.strokeStyle=color; ctx.lineWidth=width; ctx.stroke();
   }
 
-  if (currentView === 'boundary') {
-    drawPoly(demo.boundary, '#e6edf3', 1.5, 'rgba(230,237,243,0.04)');
+  if (currentView==='boundary') {
+    drawPoly(demo.boundary,'#e6edf3',1.8,'rgba(230,237,243,0.05)');
+    for(var h=0;h<demo.holes.length;h++) drawPoly(demo.holes[h],'#f85149',1.5,'rgba(248,81,73,0.08)');
+    // vertex dots
+    ctx.fillStyle='#4493f8';
+    for(var i=0;i<demo.boundary.length;i++){var p=pt(demo.boundary[i]);ctx.beginPath();ctx.arc(p[0],p[1],4,0,Math.PI*2);ctx.fill();}
+    ctx.fillStyle='#f85149';
+    for(var h=0;h<demo.holes.length;h++) for(var i=0;i<demo.holes[h].length;i++){var p=pt(demo.holes[h][i]);ctx.beginPath();ctx.arc(p[0],p[1],3,0,Math.PI*2);ctx.fill();}
   } else {
-    drawPoly(demo.boundary, 'rgba(230,237,243,0.7)', 1.5);
-  }
-
-  for (const hole of demo.holes) {
-    drawPoly(hole, '#f85149', 1.5, 'rgba(248,81,73,0.1)');
-  }
-
-  // Vertex dots on boundary view
-  if (currentView === 'boundary') {
-    ctx.fillStyle = '#4493f8';
-    for (const v of demo.boundary) {
-      const [px, py] = pt(v);
-      ctx.beginPath();
-      ctx.arc(px, py, 3.5, 0, Math.PI*2);
-      ctx.fill();
-    }
-    ctx.fillStyle = '#f85149';
-    for (const hole of demo.holes) {
-      for (const v of hole) {
-        const [px, py] = pt(v);
-        ctx.beginPath();
-        ctx.arc(px, py, 3, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
+    drawPoly(demo.boundary,'rgba(230,237,243,0.65)',1.5);
+    for(var h=0;h<demo.holes.length;h++) drawPoly(demo.holes[h],'#f85149',1.5,'rgba(248,81,73,0.1)');
   }
 }
 
-/* ── Stats update ── */
+/* ── Stats ── */
 function updateStats(demo, tris) {
-  const angles = tris.map(triMinAngle);
-  const minAng  = angles.length ? Math.min(...angles) : 0;
-  const meanAng = angles.length ? angles.reduce((a,b)=>a+b,0)/angles.length : 0;
-  const badCount = angles.filter(a=>a<20).length;
-
-  // Unique vertex count (rough)
-  const vset = new Set();
-  for (const tri of tris) for (const [x,y] of tri) vset.add(`${x.toFixed(4)},${y.toFixed(4)}`);
-
-  document.getElementById('s-tri').textContent   = tris.length.toLocaleString();
-  document.getElementById('s-vert').textContent  = vset.size.toLocaleString();
-  document.getElementById('s-area').textContent  = demo.area + ' m²';
-  document.getElementById('s-open').textContent  = demo.openings;
-
-  const minEl  = document.getElementById('s-minang');
-  const badEl  = document.getElementById('s-bad');
-  minEl.textContent  = minAng.toFixed(1) + '°';
-  minEl.className    = 'stat-row-val ' + (minAng >= 20 ? 'good' : 'warn');
-  document.getElementById('s-meanang').textContent = meanAng.toFixed(1) + '°';
-  badEl.textContent  = badCount;
-  badEl.className    = 'stat-row-val ' + (badCount === 0 ? 'good' : 'warn');
-
-  const quality = Math.min(100, Math.max(0, (minAng / 30) * 100));
-  const bar = document.getElementById('qual-bar');
-  bar.style.width = quality + '%';
-  bar.style.background = quality > 66 ? 'var(--success)' : quality > 33 ? 'var(--warn)' : 'var(--danger)';
+  var angles=tris.map(triMinAngle);
+  var minAng=angles.length?Math.min.apply(null,angles):0;
+  var meanAng=angles.length?angles.reduce(function(a,b){return a+b;},0)/angles.length:0;
+  var badCount=angles.filter(function(a){return a<20;}).length;
+  var vset={};
+  for(var i=0;i<tris.length;i++) for(var j=0;j<3;j++){var k=tris[i][j][0].toFixed(4)+','+tris[i][j][1].toFixed(4);vset[k]=1;}
+  document.getElementById('s-tri').textContent=tris.length.toLocaleString();
+  document.getElementById('s-vert').textContent=Object.keys(vset).length.toLocaleString();
+  document.getElementById('s-area').textContent=demo.area+' m²';
+  document.getElementById('s-open').textContent=demo.openings;
+  var minEl=document.getElementById('s-minang');
+  minEl.textContent=minAng.toFixed(1)+'°';
+  minEl.className='stat-row-val '+(minAng>=20?'good':'warn');
+  document.getElementById('s-meanang').textContent=meanAng.toFixed(1)+'°';
+  var badEl=document.getElementById('s-bad');
+  badEl.textContent=badCount;
+  badEl.className='stat-row-val '+(badCount===0?'good':'warn');
+  var quality=Math.min(100,Math.max(0,(minAng/30)*100));
+  var bar=document.getElementById('qual-bar');
+  bar.style.width=quality+'%';
+  bar.style.background=quality>66?'var(--success)':quality>33?'var(--warn)':'var(--danger)';
 }
 
-/* ── Animation ── */
-function animate(duration=600) {
-  if (animFrame) cancelAnimationFrame(animFrame);
-  animProg = 0;
-  const start = performance.now();
-  function step(now) {
-    animProg = Math.min(1, (now - start) / duration);
+/* ── Animate ── */
+function animate(duration) {
+  if(animFrame) cancelAnimationFrame(animFrame);
+  animProg=0;
+  var start=performance.now();
+  function step(now){
+    animProg=Math.min(1,(now-start)/(duration||500));
     draw();
-    if (animProg < 1) animFrame = requestAnimationFrame(step);
-    else animFrame = null;
+    if(animProg<1) animFrame=requestAnimationFrame(step); else animFrame=null;
   }
-  animFrame = requestAnimationFrame(step);
+  animFrame=requestAnimationFrame(step);
 }
 
 /* ── Load demo ── */
 function loadDemo(demo) {
-  currentDemo = demo;
-  const result = triangulate(demo);
-  triangles = result.tris;
-  allVerts  = result.verts;
+  currentDemo=demo;
+  try {
+    triangles=doTriangulate(demo);
+  } catch(e) {
+    triangles=[];
+    console.error('Triangulation failed:',e);
+  }
   updateStats(demo, triangles);
-  document.getElementById('canvas-label').textContent =
-    `earcut CDT · ${triangles.length} triangles · ${demo.name}`;
+  document.getElementById('canvas-label').textContent=
+    (typeof earcut==='function'?'earcut CDT':'inline ear-clip')+' · '+triangles.length+' triangles · '+demo.name;
   animate(500);
 }
 
-/* ── IFC upload parser ── */
+/* ── IFC parser ── */
 function parseIFC(text) {
-  // Extract IFCCARTESIANPOINT entities
-  const points = {};
-  const ptRe = /#(\d+)\s*=\s*IFCCARTESIANPOINT\s*\(\s*\(\s*([\d.\-Ee,\s]+)\s*\)\s*\)/gi;
-  let m;
-  while ((m = ptRe.exec(text)) !== null) {
-    const coords = m[2].split(',').map(s => parseFloat(s.trim()));
-    points['#' + m[1]] = coords;
+  var points={};
+  var ptRe=/#(\d+)\s*=\s*IFCCARTESIANPOINT\s*\(\s*\(\s*([\d.\-Ee,\s]+)\s*\)\s*\)/gi, m;
+  while((m=ptRe.exec(text))!==null) {
+    var coords=m[2].split(',').map(function(s){return parseFloat(s.trim());});
+    points['#'+m[1]]=coords;
   }
-
-  // Extract IFCPOLYLINE
-  const polylines = {};
-  const plRe = /#(\d+)\s*=\s*IFCPOLYLINE\s*\(\s*\(\s*((?:#\d+\s*,?\s*)+)\s*\)\s*\)/gi;
-  while ((m = plRe.exec(text)) !== null) {
-    const ids = m[2].match(/#\d+/g) || [];
-    polylines['#' + m[1]] = ids
-      .map(id => points[id])
-      .filter(Boolean)
-      .map(c => [c[0]/1000, c[1]/1000]); // mm → m
+  var polylines={};
+  var plRe=/#(\d+)\s*=\s*IFCPOLYLINE\s*\(\s*\(\s*((?:#\d+\s*,?\s*)+)\s*\)\s*\)/gi;
+  while((m=plRe.exec(text))!==null) {
+    var ids=(m[2].match(/#\d+/g)||[]);
+    polylines['#'+m[1]]=ids.map(function(id){return points[id];}).filter(Boolean).map(function(c){return [c[0]/1000,c[1]/1000];});
   }
-
-  // Extract IFCRECTANGLEPROFILEDEF → xdim, ydim
-  const rectProfiles = {};
-  const rpRe = /#(\d+)\s*=\s*IFCRECTANGLEPROFILEDEF\s*\([^)]+?,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/gi;
-  while ((m = rpRe.exec(text)) !== null) {
-    const w = parseFloat(m[2]) / 1000, h = parseFloat(m[3]) / 1000;
-    const hw = w/2, hh = h/2;
-    rectProfiles['#' + m[1]] = [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]];
+  var rectProfiles={};
+  var rpRe=/#(\d+)\s*=\s*IFCRECTANGLEPROFILEDEF\s*\([^)]+?,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/gi;
+  while((m=rpRe.exec(text))!==null) {
+    var w=parseFloat(m[2])/1000, h=parseFloat(m[3])/1000, hw=w/2, hh=h/2;
+    rectProfiles['#'+m[1]]=[[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]];
   }
-
-  // Find any profile boundary
-  let boundary = null;
-  for (const id in rectProfiles) { boundary = rectProfiles[id]; break; }
-  if (!boundary) for (const id in polylines) { if (polylines[id].length >= 3) { boundary = polylines[id]; break; } }
-
-  return boundary;
+  for(var id in rectProfiles) return rectProfiles[id];
+  for(var id in polylines) if(polylines[id].length>=3) return polylines[id];
+  return null;
 }
 
-/* ── Preset buttons ── */
-document.querySelectorAll('.preset-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    loadDemo(DEMOS[parseInt(btn.dataset.idx)]);
-    document.getElementById('upload-feedback').textContent = '';
-    document.getElementById('upload-feedback').className = 'upload-feedback';
-  });
-});
-
-/* ── View toggle ── */
-document.querySelectorAll('.view-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentView = btn.dataset.view;
-    const legendQ = document.getElementById('legend-quality');
-    legendQ.style.display = currentView === 'quality' ? 'flex' : 'none';
-    animProg = 1;
-    draw();
-  });
-});
-
-/* ── IFC upload ── */
-document.getElementById('ifc-upload').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const fb = document.getElementById('upload-feedback');
-  fb.textContent = 'Parsing…';
-  fb.className = 'upload-feedback';
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const text = ev.target.result;
-    const boundary = parseIFC(text);
-    if (!boundary || boundary.length < 3) {
-      fb.textContent = 'Could not extract slab geometry. Ensure the IFC contains IfcSlab with IfcRectangleProfileDef or IfcPolyline.';
-      fb.className = 'upload-feedback err';
-      return;
-    }
-    // Compute area (shoelace)
-    let area = 0;
-    for (let i=0,j=boundary.length-1;i<boundary.length;j=i++) {
-      area += boundary[j][0]*boundary[i][1] - boundary[i][0]*boundary[j][1];
-    }
-    area = Math.abs(area) / 2;
-    const custom = { name: file.name, boundary, holes: [], area: parseFloat(area.toFixed(2)), openings: 0 };
-    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-    fb.textContent = `Loaded: ${file.name} — ${boundary.length} vertices, area ≈ ${area.toFixed(1)} m²`;
-    fb.className = 'upload-feedback ok';
-    loadDemo(custom);
-  };
-  reader.readAsText(file);
-  e.target.value = '';
-});
-
-/* ── Copy button ── */
-document.getElementById('copy-btn').addEventListener('click', () => {
-  const code = `from ifc_slab_mesh import triangulate_ifc_file\n\nresult = triangulate_ifc_file("building.ifc")\n\nfor name, mesh in result.meshes.items():\n    print(f"{name}: {mesh.faces.shape[0]} triangles, {mesh.area:.1f} m²")\n\n# CLI equivalent\n# ifc-slab-mesh building.ifc -o ./meshes --format obj`;
-  navigator.clipboard.writeText(code).then(() => {
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 1800);
-  });
-});
-
-/* ── Responsive canvas resize ── */
+/* ── Resize ── */
 function resizeCanvas() {
-  const canvas = document.getElementById('mesh-canvas');
-  const wrap = canvas.parentElement;
-  const ratio = canvas.height / canvas.width;
-  canvas.style.height = (wrap.clientWidth * ratio) + 'px';
+  var canvas=document.getElementById('mesh-canvas');
+  var ratio=canvas.height/canvas.width;
+  canvas.style.height=(canvas.parentElement.clientWidth*ratio)+'px';
 }
 
-/* ── Init ── */
-loadDemo(DEMOS[0]);
-resizeCanvas();
-window.addEventListener('resize', () => { resizeCanvas(); draw(); });
-</script>
-</body>
-</html>
+/* ── Wire up events ── */
+document.querySelectorAll('.preset-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById('upload-feedback').textContent='';
+    document.getElementById('upload-feedback').className='upload-feedback';
+    loadDemo(DEMOS[parseInt(btn.dataset.idx)]);
+  });
+});
+
+document.querySelectorAll('.view-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.view-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    currentView=btn.dataset.view;
+    document.getElementById('legend-quality').style.display=currentView==='quality'?'flex':'none';
+    animProg=1; draw();
+  });
+});
+
+document.getElementById('ifc-upload').addEventListener('change', function(e) {
+  var file=e.target.files[0]; if(!file) return;
+  var fb=document.getElementById('upload-feedback');
+  fb.textContent='Parsing…'; fb.className='upload-feedback';
+  var reader=new FileReader();
+  reader.onload=function(ev) {
+    var boundary=parseIFC(ev.target.result);
+    if(!boundary||boundary.length<3){fb.textContent='Could not extract slab geometry.';fb.className='upload-feedback err';return;}
+    var area=0;
+    for(var i=0,j=boundary.length-1;i<boundary.length;j=i++) area+=boundary[j][0]*boundary[i][1]-boundary[i][0]*boundary[j][1];
+    area=Math.abs(area)/2;
+    document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});
+    fb.textContent='Loaded: '+file.name+' — '+boundary.length+' vertices, area ≈ '+area.toFixed(1)+' m²';
+    fb.className='upload-feedback ok';
+    loadDemo({name:file.name,boundary:boundary,holes:[],area:parseFl
