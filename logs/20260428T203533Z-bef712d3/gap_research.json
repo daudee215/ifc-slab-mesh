@@ -1,0 +1,693 @@
+{
+  "run_id": "20260428T203533Z-bef712d3",
+  "candidates": [
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:34.790270Z",
+      "raw_url": "https://www.reddit.com/r/gis/comments/1sxvr6v/pre2000s_historical_imagery_for_romania/",
+      "raw_payload": {
+        "title": "Pre-2000s historical imagery for Romania",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Do you guys know of any tools that shows pre-2000s imagery? Like 90s, 80s etc?&lt;br/&gt; I&amp;#39;ve tried to find some websites/tools but I can&amp;#39;t figure it out.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/FourReasons&quot;&gt; /u/FourReasons &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/gis/comments/1sxvr6v/pre2000s_historical_imagery_for_romania/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a hr",
+        "subreddit": "gis",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:34.790399Z",
+      "raw_url": "https://www.reddit.com/r/gis/comments/1sxrxzn/gis_gpkg_file_attributes_manipulation/",
+      "raw_payload": {
+        "title": "GIS .gpkg file attributes manipulation",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://www.reddit.com/r/QGIS/?f=flair_name%3A%22Open%20Question%2FIssue%22&quot;&gt;&lt;/a&gt;Im just learning QGIS mapping, I want to ask how can I manipulate data inside the .gpkg file.&lt;/p&gt; &lt;p&gt;How can I move a column without damaging the data?&lt;/p&gt; &lt;p&gt;example:&lt;/p&gt; &lt;p&gt;these are the columns &amp;quot;Reg_Name Prov_name Mun_name REG&amp;quot;&lt;/p&gt; &lt;p&gt;I want to move the the REG after Prov_name.&lt;/p&gt; &lt;p&gt;Anyone can help me. Thanks!&lt;/p&gt; &lt;/div&gt;&lt;!-- S",
+        "subreddit": "gis",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:36.002607Z",
+      "raw_url": "https://www.reddit.com/r/QGIS/comments/1sxrwfl/gis_gpkg_file_attributes_manipulation/",
+      "raw_payload": {
+        "title": "GIS .gpkg file attributes manipulation",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Im just learning QGIS mapping, I want to ask how can I manipulate data inside the .gpkg file.&lt;/p&gt; &lt;p&gt;How can I move a column without damaging the data?&lt;/p&gt; &lt;p&gt;example:&lt;/p&gt; &lt;p&gt;these are the columns &amp;quot;Reg_Name Prov_name Mun_name REG&amp;quot;&lt;/p&gt; &lt;p&gt;I want to move the the REG after Prov_name.&lt;/p&gt; &lt;p&gt;Anyone can help me. Thanks!&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/anon13o3&quot;&gt; /u/",
+        "subreddit": "QGIS",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:36.003601Z",
+      "raw_url": "https://www.reddit.com/r/QGIS/comments/1sv7a16/what_seems_to_be_the_problem/",
+      "raw_payload": {
+        "title": "What seems to be the problem?",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I&amp;#39;ve reprojected it to the correct CRS and etc. My method works on other DEMs idk what the problem is with this one. Been fixing it for hours and I need an immediate fix. How do I properly get the streams &lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Medical_Smile_8500&quot;&gt; /u/Medical_Smile_8500 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://i.redd.it/7p56h2300bxg1.jpeg&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&l",
+        "subreddit": "QGIS",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:37.278986Z",
+      "raw_url": "https://www.reddit.com/r/remotesensing/comments/1sqv8hh/headwall_batch_processing_tool_reported_by/",
+      "raw_payload": {
+        "title": "Headwall Batch Processing Tool Reported by Federal IT as Keylogger",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Hello all, I have been processing some hyperspectral data and Headwall&amp;#39;s Batch Processing Tool triggered our IT due to keylogging. Just wanted to give a heads up to any users out there and also to see if anybody else has encountered this or knows anything about it.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/ovoid709&quot;&gt; /u/ovoid709 &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/remotesensing/comments/1sqv8hh/head",
+        "subreddit": "remotesensing",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:38.632069Z",
+      "raw_url": "https://www.reddit.com/r/bim/comments/1sts3re/que_me_recomiendan_estudiar_para_progresar_en_mi/",
+      "raw_payload": {
+        "title": "Que me recomiendan estudiar para progresar en mi carrera de modelador BIM",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;actualmente soy modelador MEP con experiencia de 1 a\u00f1o, he estado pensando en estudiar algo mas para avanzar profesionalmente, no quiero lo cl\u00e1sico como arquitectura o ingenier\u00eda, por eso quer\u00eda saber si me podr\u00edan recomendar algo mas que pueda hacer aparte de lo que ya mencione, vi que inform\u00e1tica podr\u00eda ayudar pero he escuchado que al menos aqu\u00ed en chile no es muy valorado en el mercado o simplemente el cargo no existe, los leo.&lt;/p&gt; &lt;/div&gt;&lt;!-- SC_ON --&gt; &amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://ww",
+        "subreddit": "BIM",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:40.341415Z",
+      "raw_url": "https://www.reddit.com/r/postgis/comments/1kkj3nq/representative_locations_nongreedy_clustering/",
+      "raw_payload": {
+        "title": "Representative locations (non-greedy clustering?)",
+        "body": "&lt;!-- SC_OFF --&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;I have a database of ~2,600 locations. How can I cluster these such that I can pull out a smaller set of clusters (say a few hundred) with a single location that that &amp;#39;represents&amp;#39; each cluster. &lt;/p&gt; &lt;p&gt;I looked at ST_ClusterWithin but It seems to be &amp;#39;greedy&amp;#39; so that it tends to create large clusters. When I use it and I have a lot of locations that are close together, I just get one big cluster containing all of them. only outliers that are &amp;gt; the distance away from *all* other locat",
+        "subreddit": "PostGIS",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "reddit",
+      "captured_at": "2026-04-28T20:36:40.342118Z",
+      "raw_url": "https://www.reddit.com/r/postgis/comments/1fsrtmc/how_can_i_optimize_a_large_dataset_query/",
+      "raw_payload": {
+        "title": "How can I Optimize a large dataset query.",
+        "body": "&amp;#32; submitted by &amp;#32; &lt;a href=&quot;https://www.reddit.com/user/Fakercel&quot;&gt; /u/Fakercel &lt;/a&gt; &lt;br/&gt; &lt;span&gt;&lt;a href=&quot;/r/PostgreSQL/comments/1fsqze5/how_can_i_optimize_a_large_dataset_query/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt; &amp;#32; &lt;span&gt;&lt;a href=&quot;https://www.reddit.com/r/postgis/comments/1fsrtmc/how_can_i_optimize_a_large_dataset_query/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt;",
+        "subreddit": "PostGIS",
+        "signals": [
+          "reddit_rss"
+        ],
+        "auth_mode": "rss"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "github_issue",
+      "captured_at": "2026-04-28T20:36:38.078287Z",
+      "raw_url": "https://github.com/osmfoundation/ewg_bidding/issues/41",
+      "raw_payload": {
+        "title": "Microgrant Proposal: Data Rescue Pipeline - Preserving Deleted OpenStreetMap Features in OpenHistoricalMap",
+        "body": "## **Individual/Group Details**\n- **Name:** Rub\u00e9n L\u00f3pez Mendoza\n- **Location:** Ayacucho, Per\u00fa\n- Contant details:  rub2106@gmail.com - https://www.openstreetmap.org/user/Rub21\n- Group:  [GeoCompas](https://geocompas.ai/)\n\n----------\n## **Project Title**\n\n**Data Rescue Pipeline: Preserving Deleted OpenStreetMap Features in OpenHistoricalMap**\n\n----------\n## **Project Overview**\n\nWhen objects like buildings or roads are deleted in OpenStreetMap (OSM), valuable historical and cultural data is often lost forever. This project will create a system to detect such deletions and recommend them for preservation in OpenHistoricalMap (OHM), where they will be stored permanently as part of its growing historical database. By ensuring that OSM contributors\u2019 efforts live on beyond present-day maps, this project empowers the OSM community and motivates mappers to continue enriching OSM with confidence. At the same time, it enriches OHM\u2019s mission to represent past geographies more completely.\n\nRelated",
+        "reactions": 18,
+        "repo": "https://api.github.com/repos/osmfoundation/ewg_bidding",
+        "labels": [],
+        "signals": [
+          "github_issue"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "github_issue",
+      "captured_at": "2026-04-28T20:36:40.511683Z",
+      "raw_url": "https://github.com/home-assistant/core/issues/151223",
+      "raw_payload": {
+        "title": "Upcoming changes to the tado\u00b0 API",
+        "body": "Following our recent exchanges with the Home Assistant developers (@erwindouna et al.) over the past few months, we\u2019d now like to track the upcoming changes in the form of a GitHub issue to ensure full transparency.\nWe have an important update for users of our REST API, which - while never officially supported for third parties - we\u2019ve historically left open and unrestricted. We\u2019ve always believed in fair use, and we intend to continue supporting that principle.\n\nThe API is commonly used by third-party and open-source platforms, like Home Assistant, as well as by users running their own custom scripts. Nevertheless, a small fraction of very frequent API users are currently responsible for a disproportionately high share of our server expenses.\n\nIn general, simple requests should be handled locally whenever possible - both to reduce server load and to save energy. That\u2019s why, on our V3+ generation, we offer local access via HomeKit, which is also already supported by Home Assistant. Wit",
+        "reactions": 195,
+        "repo": "https://api.github.com/repos/home-assistant/core",
+        "labels": [
+          "integration: tado"
+        ],
+        "signals": [
+          "github_issue"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:34.664965Z",
+      "raw_url": "http://arxiv.org/abs/2604.24760v1",
+      "raw_payload": {
+        "title": "Contracting Tensor Networks with Generalized Belief Propagation",
+        "body": "Recent years have seen a growing interest in the use of belief propagation - an algorithm originally introduced for performing statistical inference on graphical models - for approximate, but highly efficient, tensor network contraction. Here, we detail how to apply generalized belief propagation (GBP) - where messages are passed within a hierarchy of overlapping regions of the tensor network - to approximately contract tensor networks and obtain accurate results. The original belief propagation algorithm is a corner case of this approach, corresponding to a particularly simple choice of regions of the tensor network. We implement the GBP algorithm for a number of different region choices on a range of two- and three-dimensional, infinite and finite tensor networks, solving the correspondi",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:34.665019Z",
+      "raw_url": "http://arxiv.org/abs/2604.24756v1",
+      "raw_payload": {
+        "title": "A Strongly Polynomial Algorithm for Arctic Auctions",
+        "body": "Our main contribution is a strongly polynomial algorithm for computing an equilibrium for the Arctic Auction, which is the quasi-linear extension of the linear Fisher market model. We build directly on Orlin's strongly polynomial algorithm for the linear Fisher market (Orlin, 2010). The first combinatorial polynomial algorithm for the linear Fisher market was based on the primal-dual paradigm (Devanur et al., 2008). This was followed by Orlin's scaling-based algorithms. The Arctic Auction (Klemperer 2018) was developed for the Government of Iceland to allow individuals to exchange blocked offshore assets. It is a variant of the product-mix auction (Klemperer 2008, 2010, 2018) that was designed for, and used by, the Bank of England, to allocate liquidity efficiently across banks pledging he",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:34.665058Z",
+      "raw_url": "http://arxiv.org/abs/2604.24749v1",
+      "raw_payload": {
+        "title": "The Optimal Sample Complexity of Multiclass and List Learning",
+        "body": "While the optimal sample complexity of binary classification in terms of the VC dimension is well-established, determining the optimal sample complexity of multiclass classification has remained open. The appropriate complexity parameter for multiclass classification is the DS dimension, and despite significant efforts, a gap of $\\sqrt{\\text{DS}}$ has persisted between the upper and lower bounds on sample complexity. Recent work by Hanneke et al. (2026) shows a novel algebraic characterization of multiclass hypothesis classes in terms of their DS dimension. Building up on this, we show that the maximum hypergraph density of any multiclass hypothesis class is upper-bounded by its DS dimension. This proves a longstanding conjecture of Daniely and Shalev-Shwartz (2014). As a consequence, we d",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:34.665076Z",
+      "raw_url": "http://arxiv.org/abs/2604.24742v1",
+      "raw_payload": {
+        "title": "Application of a Quantum Amplitude Redistribution Algorithm to the Data Filtering Problem",
+        "body": "This paper presents an analysis of the applicability of a quantum amplitude redistribution algorithm to the data filtering problem and the results of modeling the algorithm's operation in comparison with a median filter.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:34.665122Z",
+      "raw_url": "http://arxiv.org/abs/2604.24739v1",
+      "raw_payload": {
+        "title": "CAbLECAR: efficiently scheduling QLDPC codes on a tileable spin qubit chip with shuttling",
+        "body": "Semiconductor spin qubits are a promising platform for large-scale quantum computing, but have yet to take full advantage of the broad class of quantum low-density parity check (QLDPC) codes, which promise high encoding rates and efficient logic but require nonlocal connectivity between physical qubits. In this work, we investigate the implementation of QLDPC codes on a tileable, shuttling-based spin qubit architecture. By tailoring syndrome extraction circuits to the shuttling noise model, we significantly improve on previous surface code proposals and extend the feasible shuttling range of the architecture by 5-10x, enabling the implementation of more complex codes with long-range interactions. Taking inspiration from the field of robotics, we develop a coordinated shuttle scheduling alg",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:36.283610Z",
+      "raw_url": "http://arxiv.org/abs/2604.24764v1",
+      "raw_payload": {
+        "title": "World-R1: Reinforcing 3D Constraints for Text-to-Video Generation",
+        "body": "Recent video foundation models demonstrate impressive visual synthesis but frequently suffer from geometric inconsistencies. While existing methods attempt to inject 3D priors via architectural modifications, they often incur high computational costs and limit scalability. We propose World-R1, a framework that aligns video generation with 3D constraints through reinforcement learning. To facilitate this alignment, we introduce a specialized pure text dataset tailored for world simulation. Utilizing Flow-GRPO, we optimize the model using feedback from pre-trained 3D foundation models and vision-language models to enforce structural coherence without altering the underlying architecture. We further employ a periodic decoupled training strategy to balance rigid geometric consistency with dyna",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:36.283667Z",
+      "raw_url": "http://arxiv.org/abs/2604.24763v1",
+      "raw_payload": {
+        "title": "Tuna-2: Pixel Embeddings Beat Vision Encoders for Multimodal Understanding and Generation",
+        "body": "Unified multimodal models typically rely on pretrained vision encoders and use separate visual representations for understanding and generation, creating misalignment between the two tasks and preventing fully end-to-end optimization from raw pixels. We introduce Tuna-2, a native unified multimodal model that performs visual understanding and generation directly based on pixel embeddings. Tuna-2 drastically simplifies the model architecture by employing simple patch embedding layers to encode visual input, completely discarding the modular vision encoder designs such as the VAE or the representation encoder. Experiments show that Tuna-2 achieves state-of-the-art performance in multimodal benchmarks, demonstrating that unified pixel-space modelling can fully compete with latent-space approa",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:36.283746Z",
+      "raw_url": "http://arxiv.org/abs/2604.24759v1",
+      "raw_payload": {
+        "title": "The lifetime of 100,000 molecular clouds in the nearby Universe",
+        "body": "Multiple mechanisms are proposed for the formation of giant molecular clouds (GMCs), from gravitational free-fall caused by self-gravity to stellar feedback-driven gas compression. Both the galactic environment and galaxy conditions could play an additional role in enhancing the formation via their gas surface density and star formation activity. In this paper, we make use of a catalog of 108,466 GMCs identified by F770W PHANGS--JWST imaging across 66 galaxies at a homogenized resolution of 30~pc. We measure the mass spectra in various galactic regions, whose power-law slopes vary from $-1.2$ to $-2.0$. We then estimate the formation time of each cloud using a model where GMCs form from multiple feedback compression, and find that clouds with masses $\\leq 10^{5}\\,M_{\\odot}$ form, on averag",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:36.283847Z",
+      "raw_url": "http://arxiv.org/abs/2604.24752v1",
+      "raw_payload": {
+        "title": "Connecting the dusty dots: dust depletion and extinction of local interstellar clouds",
+        "body": "Investigating the chemical complexity of the interstellar medium (ISM) is key for understanding its physical nature and evolution. In this work, we study parsec-scale interstellar dust clouds in the neutral ISM of the Milky Way using two different probes: dust depletion and dust extinction. We examine their relationship to investigate the distribution of metals and dust in the Solar neighbourhood, and how they are related to the Local Bubble. We use measurements of dust depletion for individual gas clouds along sight lines of sight towards bright O/B stars within 1.1 kpc of the Sun, derived from UV absorption-line spectra. We combine these with parsec-scale 3D dust extinction density maps out to 1.25 kpc. We assume a correlation between dust depletion and dust extinction density, which we ",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:37.506094Z",
+      "raw_url": "http://arxiv.org/abs/2604.24755v1",
+      "raw_payload": {
+        "title": "Non-Abelian Particle-Loop, Fracton, and Planon Condensation in Cage-Net Models",
+        "body": "We present a framework for non-Abelian p-loop, fracton, and planon condensation in 3+1 dimensions by constructing extended cage-net fracton models using decoupled layers of the Hu-Geer-Wu (HGW) string-net model. These cage-net models extend the conventional cage-net models based on the Levin-Wen (LW) string-net model in the sense that they inherit the tail degrees of freedom of the HGW models, which are essential for completely describing the internal spaces of quasiparticles. This approach allows us to explicitly derive the quasiparticle spectra of the cage-net models by projecting those of the parent 2D HGW layers. Utilizing this framework, we can condense the p-loops formed by non-Abelian anyons within a fracton phase. Specifically, we construct the condensation projector for $(\u03c3\\bar\u03c3, ",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:37.506161Z",
+      "raw_url": "http://arxiv.org/abs/2604.24751v1",
+      "raw_payload": {
+        "title": "Semiclassical phases of charged spin-$1/2$ matter-wave interferometers in gravitational wave backgrounds",
+        "body": "A matter wave propagating through curved spacetime accumulates phase that encodes both geometry and gauge structure. We develop a semiclassical framework for charged spin-$1/2$ matter-wave interferometers based on a WKB expansion of the covariant Dirac equation, in which the phase decomposes into dynamical, spin, and electromagnetic Aharonov-Bohm (AB) contributions. In a freely falling detector frame, all three channels are governed by local tidal fields. In a weak gravitational-wave (GW) background, the dynamical and spin phases probe the gravitoelectric and gravitomagnetic sectors of curvature, while the AB phase arises from curvature-induced electromagnetic fields obtained from Maxwell's equations in curved spacetime. For a Mach-Zehnder interferometer (MZI), all three responses are dete",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:37.506179Z",
+      "raw_url": "http://arxiv.org/abs/2604.24746v1",
+      "raw_payload": {
+        "title": "The Hyperboloidal and Spacetime Positive Mass Theorem in All Dimensions",
+        "body": "Using the recent work of Brendle--Wang on the Riemannian positive mass theorem, we prove the spacetime positive mass theorem for asymptotically flat and asymptotically hyperboloidal initial data sets in arbitrary dimension $n$.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:37.506243Z",
+      "raw_url": "http://arxiv.org/abs/2604.24721v1",
+      "raw_payload": {
+        "title": "Dynamical Modeling of the Broad-Line Region with High-Mass Active Galactic Nuclei and Constraints on the Virial Factor",
+        "body": "We present the results of broad-line region (BLR) dynamical modeling for eight high-mass active galactic nuclei (AGNs) from the Seoul National University AGN Monitoring Project, by constraining BLR geometry and kinematics as well as black hole (BH) mass ($M_{\\rm BH}$). We find that the H$\u03b2$-emitting BLRs are best described as thick disks viewed at intermediate inclinations, with emission preferentially originating from the far side of the BLR. BLR kinematics show a combination of rotational, inflowing and outflowing components. By comparing the $M_{\\rm BH}$ from dynamical modeling with the virial products based on reverberation lags and line widths, we determine the virial factor $f$ for individual AGNs. Combining our sample with those $M_{\\rm BH}$ consistently determined from BLR dynamica",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:37.506284Z",
+      "raw_url": "http://arxiv.org/abs/2604.24720v1",
+      "raw_payload": {
+        "title": "Sentiment and Emotion Classification of Indonesian E-Commerce Reviews via Multi-Task BiLSTM and AutoML Benchmarking",
+        "body": "Indonesian marketplace reviews mix standard vocabulary with slang, regional loanwords, numeric shorthands, and emoji, making lexicon-based sentiment tools unreliable in practice. This paper describes a two-track classification pipeline applied to the PRDECT-ID dataset, which contains 5,400 product reviews from 29 Indonesian e-commerce categories, each labeled for binary sentiment (Positive/Negative) and five-class emotion (Happy, Sad, Fear, Love, Anger). The first track applies TF-IDF vectorization with a PyCaret AutoML sweep across standard classifiers. The second track is a PyTorch Bidirectional Long Short-Term Memory (BiLSTM) network with a shared encoder and two task-specific output heads. A preprocessing module applies 14 sequential cleaning steps, including a 140-entry slang dictiona",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:38.506348Z",
+      "raw_url": "http://arxiv.org/abs/2604.24758v1",
+      "raw_payload": {
+        "title": "Personalized Worked Example Generation from Student Code Submissions using Pattern-based Knowledge Components",
+        "body": "Adaptive programming practice often relies on fixed libraries of worked examples and practice problems, which require substantial authoring effort and may not correspond well to the logical errors and partial solutions students produce while writing code. As a result, students may receive learning content that does not directly address the concepts they are working to understand, while instructors must either invest additional effort in expanding content libraries or accept a coarse level of personalization. We present an approach for knowledge-component (KC) guided educational content generation using pattern-based KCs extracted from student code. Given a problem statement and student submissions, our pipeline extracts recurring structural KC patterns from students' code through AST-based",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:39.577131Z",
+      "raw_url": "http://arxiv.org/abs/2604.24754v1",
+      "raw_payload": {
+        "title": "The asymptotic oscillations of moments related to Dirichlet series with missing digits",
+        "body": "We prove that the (suitably rescaled) moments of certain discrete measures on the unit interval, which are related to the numerical evaluation of zeta series with missing digits in radix $b$, are asymptotically $1$-periodic in the base $b$ logarithm of the index, i.e. asymptotically invariant under multiplication by $b$ of the index.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:39.577222Z",
+      "raw_url": "http://arxiv.org/abs/2604.24735v1",
+      "raw_payload": {
+        "title": "How Quantum Contextuality disappears in the Classical Limit",
+        "body": "The emergence of classicality is fundamentally driven by the interaction between a quantum system and its environment. Foundational open-system approaches, notably the Caldeira-Leggett model, successfully captured how these interactions lead to macroscopic effects like quantum dissipation and decoherence. However, these approaches often leave the precise definitions of classicality and quantumness ambiguous. In quantum information theory, this boundary is a heavily scrutinized question, and Kochen-Specker contextuality emerges as a hallmark of nonclassicality. It is therefore natural to investigate whether decoherence can actually suppress this property. Taking this path creates an apparent conundrum, once there exist two distinct manifestations of quantum contextuality: state-dependent an",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:39.577285Z",
+      "raw_url": "http://arxiv.org/abs/2604.24730v1",
+      "raw_payload": {
+        "title": "Analysis of the Gaia DR3 planetary nebula candidates and the possible symbiotic stars among them",
+        "body": "The Gaia DR3, released in June 2022, included low-resolution BP/RP (XP) spectra that have been exploited for the classification of various types of emission-line objects using machine-learning techniques. The Gaia Extended Stellar Parametrizer for Emission-Line Stars (ESP-ELS) algorithm identified 273 sources as potential planetary nebulae (PNe). We aim to analyze the PN sample produced by the ESP-ELS algorithm to investigate the true nature of the objects classified as PNe. We extracted all sources from the catalog classified as PNe by the ESP-ELS algorithm and filtered out 200 objects with secure classifications available in the literature. Of these, $\\sim$65% correspond to known Galactic or Magellanic compact PNe, and $\\sim$20% to D- or D'-type symbiotic systems. The XP spectra of the r",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:39.577330Z",
+      "raw_url": "http://arxiv.org/abs/2604.24728v1",
+      "raw_payload": {
+        "title": "Partial extended b-metric and some fixed point theorem",
+        "body": "In this paper, we introduce the concept of partial extended b-metric spaces (PEBMS) as a unification and generalization of extended b-metric spaces and partial b-metric spaces. This new structure incorporates a point-dependent control function together with the possibility of non-zero self-distance, providing a more flexible framework for the study of generalized metric spaces. We establish several fundamental properties of PEBMS, including convergence, Cauchy sequences, and 0-completeness. By introducing the notion of 0-Cauchy sequences, we extend various results from extended b-metric spaces to the PEBMS setting. In particular, we prove fixed point theorems for contractive mappings and show the existence and uniqueness of fixed points under suitable conditions. Furthermore, we demonstrat",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:40.836658Z",
+      "raw_url": "http://arxiv.org/abs/2604.24745v1",
+      "raw_payload": {
+        "title": "Conflict-Aware Harmonized Rotational Gradient for Multiscale Kinetic Regimes",
+        "body": "In this paper, we propose a harmonized rotational gradient method, termed HRGrad, for simultaneously tackling multiscale time-dependent kinetic problems with varying small parameters. These parameters exhibit asymptotic transitions from microscopic to macroscopic physics, making it a challenging multi-task problem to solve over all ranges simultaneously. Solving tasks in different asymptotic regions often encounter gradient conflicts, which can lead to the failure of multi-task learning. To address this challenge, we explicitly encode a hidden representation of these parameters, ensuring that the corresponding solving tasks are serialized for simultaneous training. Furthermore, to mitigate gradient conflicts, we segment the prediction results to construct task losses and introduce a novel ",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:43.726877Z",
+      "raw_url": "http://arxiv.org/abs/2604.24733v1",
+      "raw_payload": {
+        "title": "Calculating the second rational cohomology group of the Torelli group",
+        "body": "Minahan and the author recently proved results that allow the calculation of the second rational cohomology group of the Torelli group. This builds on two key ingredients: Hain's calculation of the image of the cup product pairing on the first cohomology group, and Kupers--Randal-Williams's calculation of the maximal algebraic subrepresentation of the second cohomology group. This paper gives an exposition of both of these results, including prerequisite material about the Johnson homomorphism.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:43.726931Z",
+      "raw_url": "http://arxiv.org/abs/2604.24724v1",
+      "raw_payload": {
+        "title": "Data-Driven Privacy-Preserving Modeling and Frequency Regulation with Aggregated Electric Vehicles via Bilinear Hidden Markov Model",
+        "body": "Vehicle-to-Grid (V2G) technology allows bidirectional power flow for real-time grid support, making electric vehicles (EVs) well-suited for ancillary services such as frequency regulation. However, existing methods for flexibility estimation and coordinating aggregated EVs often rely on individual EV traveling information (e.g., arrival/departure time) and/or characteristic parameters (e.g., charging efficiency, battery capacity) as well as real-time state-of-charge (SOC), which raises privacy concerns and faces data quality issues. To address these challenges, this paper proposes a data-driven, privacy-preserving modeling and control framework for frequency regulation using aggregated EVs. The proposed method can provide accurate estimation for power outputs and flexibility of aggregated ",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:44.836545Z",
+      "raw_url": "http://arxiv.org/abs/2604.24708v1",
+      "raw_payload": {
+        "title": "Scalable Hyperparameter-Divergent Ensemble Training with Automatic Learning Rate Exploration for Large Models",
+        "body": "Training large neural networks with data-parallel stochastic gradient descent allocates N GPU replicas to compute effectively identical updates -- a practice that leaves the rich space of learning rate configurations entirely unexplored during training. We propose Hyperparameter-Divergent Ensemble Training (HDET), a method that repurposes these replicas for simultaneous learning rate exploration at negligible communication overhead. HDET operates in alternating phases: a fan-out stage in which replicas train independently under a structured, symmetric spread of learning rates, and a converge stage in which parameters are averaged across all replicas via AllReduce every T steps. Building on this ensemble substrate, we further propose an automatic learning rate (auto-LR) controller that trea",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:44.836605Z",
+      "raw_url": "http://arxiv.org/abs/2604.24696v1",
+      "raw_payload": {
+        "title": "NeuroClaw Technical Report",
+        "body": "Agentic artificial intelligence systems promise to accelerate scientific workflows, but neuroimaging poses unique challenges: heterogeneous modalities (sMRI, fMRI, dMRI, EEG), long multi-stage pipelines, and persistent reproducibility risks. To address this gap, we present NeuroClaw, a domain-specialized multi-agent research assistant for executable and reproducible neuroimaging research. NeuroClaw operates directly on raw neuroimaging data across formats and modalities, grounding decisions in dataset semantics and BIDS metadata so users need not prepare curated inputs or bespoke model code. The platform combines harness engineering with end-to-end environment management, including pinned Python environments, Docker support, automated installers for common neuroimaging tools, and GPU confi",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:44.836656Z",
+      "raw_url": "http://arxiv.org/abs/2604.24549v1",
+      "raw_payload": {
+        "title": "GradMAP: Gradient-Based Multi-Agent Proximal Learning for Grid-Edge Flexibility",
+        "body": "Coordinating large populations of grid-edge devices requires learning methods that remain fully decentralised in deployment while still respecting three-phase AC distribution-network physics. This paper proposes gradient-based multi-agent proximal learning (GradMAP) to address this challenge. GradMAP trains independent neural-network policies for each agent without any parameter sharing, and each agent uses only its own local observation for online decision-making without communication. During offline training, GradMAP embeds a differentiable three-phase AC power-flow model in a primal-dual learning loop and uses implicit differentiation to propagate exact network-constraint violations to update the policy parameters. To speed up training, GradMAP reuses expensive environment gradients thr",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:44.836717Z",
+      "raw_url": "http://arxiv.org/abs/2604.24447v1",
+      "raw_payload": {
+        "title": "Characterizing Vision-Language-Action Models across XPUs: Constraints and Acceleration for On-Robot Deployment",
+        "body": "Vision-Language-Action (VLA) models are promising for generalist robot control, but on-robot deployment is bottlenecked by real-time inference under tight cost and energy budgets. Most prior evaluations rely on desktop-grade GPUs, obscuring the trade-offs and opportunities offered by heterogeneous edge accelerators (GPUs/XPUs/NPUs). We present a systematic analysis for low-cost VLA deployment via model-hardware co-characterization. First, we build a cross-accelerator leaderboard and evaluate model-hardware pairs under CET (Cost, Energy, Time), showing that right-sized edge devices can be more cost-/energy-efficient than flagship GPUs while meeting control-rate constraints. Second, using in-depth profiling, we uncover a consistent two-phase inference pattern: a compute-bound VLM backbone fo",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:44.836753Z",
+      "raw_url": "http://arxiv.org/abs/2604.24379v1",
+      "raw_payload": {
+        "title": "Certified geometric robustness -- Super-DeepG",
+        "body": "Safety-critical applications are required to perform as expected in normal operations. Image processing functions are often required to be insensitive to small geometric perturbations such as rotation, scaling, shearing or translation. This paper addresses the formal verification of neural networks against geometric perturbations on their image dataset. Our method Super-DeepG improves the reasoning used in linear relaxation techniques and Lipschitz optimization, and provides an implementation that leverages GPU hardware. By doing so, Super-DeepG achieves both precision and computational efficiency of robustness certification, to an extent that outperforms prior work. Super-DeepG is shared as an open-source tool on GitHub.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:45.799046Z",
+      "raw_url": "http://arxiv.org/abs/2604.24744v1",
+      "raw_payload": {
+        "title": "Dynamical preparation of U(1) quantum spin liquids in an analogue quantum simulator",
+        "body": "Locally constrained gauge theories underpin our understanding of fundamental interactions in particle physics and the emergent behaviour of quantum materials. In strongly correlated systems, they can give rise to quantum spin liquids that lack conventional order and are defined by coherent superpositions of an extensive number of many-body configurations. Realising and probing such exotic states experimentally is an outstanding challenge both in solid-state and synthetic quantum systems, not least due to the difficulty of detecting the fragile coherences between many-body states. Here, we report a large-scale (&gt;3,000 sites) realisation of a two-dimensional U(1) lattice gauge theory with ultracold atoms in a square optical superlattice and demonstrate non-equilibrium preparation of exten",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:45.799125Z",
+      "raw_url": "http://arxiv.org/abs/2604.24722v1",
+      "raw_payload": {
+        "title": "Floquet engineering of tight-binding Hamiltonians in momentum space lattices",
+        "body": "Quantum simulation with ultracold atoms provides a versatile platform to emulate condensed-matter models. In particular, momentum-space lattices enable the realization of programmable tight-binding Hamiltonians. Here, we generalize this approach by exploiting quantum resonances of a periodically driven (shaken) rotor within the Floquet framework. Using first-order time-dependent perturbation theory, we derive analytical relations between the lattice modulation and the effective tight-binding parameters, and identify explicit solutions for several resonances. We further apply optimal-control techniques to enhance the multi-period Floquet fidelity and extend the accessible parameter regimes. Experimentally, we implement this scheme with a Bose-Einstein condensate of rubidium-87 atoms in a dy",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:45.799167Z",
+      "raw_url": "http://arxiv.org/abs/2604.24680v1",
+      "raw_payload": {
+        "title": "Optical depth dictates universal bounds on many-body decay in atomic ensembles",
+        "body": "Cooperative emission is well understood for idealized symmetric systems, but its limits in spatially extended, free-space ensembles remain an open question. Here, we derive a universal law for the scaling of the maximum photon emission rate with system size that unifies both ordered arrays and disordered atomic clouds in arbitrary dimensions at fixed density. We demonstrate that, for a fixed atomic density, the maximum emission rate scales universally as the product of the atom number and the system's optical depth, with the latter encoding the dimensional scaling across all regimes from independent emission to the Dicke limit. Furthermore, we establish a scaling law for directional detection, revealing that the observed rate depends on the detector's numerical aperture: small apertures yi",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:45.799189Z",
+      "raw_url": "http://arxiv.org/abs/2604.24676v1",
+      "raw_payload": {
+        "title": "Fusion Systems on Sylow $3$-subgroups of Fischer and Monster sporadic groups: I",
+        "body": "We classify all corefree fusion systems on a Sylow $3$-subgroup of the sporadic groups $\\mathrm{Fi}_{22}$, $\\mathrm{Fi}_{23}$ and $\\mathrm{B}$. We show that the $3$-group in each case does not support any exotic fusion systems. This is the first of two papers that will complete the classification of all corefree fusion systems on Sylow $p$-subgroups of sporadic groups for $p$ odd.",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    },
+    {
+      "source": "arxiv",
+      "captured_at": "2026-04-28T20:36:45.799246Z",
+      "raw_url": "http://arxiv.org/abs/2604.24669v1",
+      "raw_payload": {
+        "title": "Microstructure engineering of Ti-6Al-4V in laser powder bed fusion via 1D thermal modeling and supporting experiments",
+        "body": "The microstructure of Ti-6Al-4V has a decisive impact on its mechanical performance; however, controlling phase composition during Laser Powder Bed Fusion (LPBF) remains difficult because of the inherent localized and cyclic thermal history. To fully leverage the design flexibility of LPBF while maintaining an efficient process, it is desirable to tailor the microstructure directly through process-parameter optimization rather than relying on post-processing or in-situ heat treatments. Nevertheless, the large and multidimensional parameter space, combined with the limited availability of experimental data, makes this task particularly challenging. In this work, we develop an efficient computational framework that links process conditions to microstructure evolution by coupling a phase tran",
+        "signals": [
+          "arxiv_paper"
+        ],
+        "auth_mode": "api"
+      },
+      "score": null,
+      "signals_count": 1,
+      "status": "pending"
+    }
+  ]
+}

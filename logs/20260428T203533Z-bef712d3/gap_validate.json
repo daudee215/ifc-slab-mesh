@@ -1,0 +1,93 @@
+{
+  "validated_at": "2026-04-28T20:41:55.280531Z",
+  "candidates": [
+    {
+      "id": "gap-001",
+      "title": "Constrained Delaunay Triangulation for IFC Slab Geometries with Opening Boundaries",
+      "domain": "bim",
+      "signals_count": 4,
+      "distinct_source_families": 3,
+      "passes_signal_rule": true,
+      "technicality_scores": {
+        "1_named_problem": 1,
+        "2_nontrivial_component": 1,
+        "3_not_thin_wrapper": 1,
+        "4_correctness_verifiable": 1,
+        "5_benchmark_feasible": 1,
+        "6_readme_can_link": 1,
+        "7_adr_worthy": 1
+      },
+      "tech_pass": true,
+      "dedup_verdict": "NOT_DUPLICATE",
+      "differentiation": "ifc-slab-mesh is the only Python tool that parses IFC, extracts IfcOpeningElement constraints, and applies CDT respecting hole boundaries \u2014 producing watertight meshes for slabs with cutouts.",
+      "status": "accepted",
+      "score": 0.884
+    },
+    {
+      "id": "gap-002",
+      "title": "Pre-generated Warp Weight Cache for Streaming COG Tile Reprojection",
+      "domain": "gis",
+      "signals_count": 3,
+      "distinct_source_families": 2,
+      "passes_signal_rule": true,
+      "technicality_scores": {
+        "1_named_problem": 1,
+        "2_nontrivial_component": 1,
+        "3_not_thin_wrapper": 1,
+        "4_correctness_verifiable": 1,
+        "5_benchmark_feasible": 1,
+        "6_readme_can_link": 1,
+        "7_adr_worthy": 1
+      },
+      "tech_pass": true,
+      "dedup_verdict": "NOT_DUPLICATE",
+      "differentiation": "cog-warp-cache is the only tool providing tile-aligned warp weight pre-generation and spatial-indexed caching specifically for COG streaming pipelines.",
+      "status": "accepted",
+      "score": 0.79
+    },
+    {
+      "id": "gap-003",
+      "title": "Topology-Preserving Simplification for Infrastructure Utility Networks",
+      "domain": "infrastructure",
+      "signals_count": 2,
+      "distinct_source_families": 1,
+      "passes_signal_rule": false,
+      "technicality_scores": {
+        "1_named_problem": 1,
+        "2_nontrivial_component": 1,
+        "3_not_thin_wrapper": 0,
+        "4_correctness_verifiable": 1,
+        "5_benchmark_feasible": 1,
+        "6_readme_can_link": 1,
+        "7_adr_worthy": 1
+      },
+      "tech_pass": false,
+      "dedup_verdict": "EVALUATE_MORE",
+      "differentiation": "",
+      "status": "rejected_low_signal",
+      "score": 0.715
+    }
+  ],
+  "selected_gap": {
+    "id": "gap-001",
+    "title": "Constrained Delaunay Triangulation for IFC Slab Geometries with Opening Boundaries",
+    "domain": "bim",
+    "signals_count": 4,
+    "distinct_source_families": 3,
+    "passes_signal_rule": true,
+    "technicality_scores": {
+      "1_named_problem": 1,
+      "2_nontrivial_component": 1,
+      "3_not_thin_wrapper": 1,
+      "4_correctness_verifiable": 1,
+      "5_benchmark_feasible": 1,
+      "6_readme_can_link": 1,
+      "7_adr_worthy": 1
+    },
+    "tech_pass": true,
+    "dedup_verdict": "NOT_DUPLICATE",
+    "differentiation": "ifc-slab-mesh is the only Python tool that parses IFC, extracts IfcOpeningElement constraints, and applies CDT respecting hole boundaries \u2014 producing watertight meshes for slabs with cutouts.",
+    "status": "accepted",
+    "score": 0.884
+  }
+}

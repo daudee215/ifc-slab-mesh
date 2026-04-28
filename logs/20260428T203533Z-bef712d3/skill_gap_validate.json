@@ -1,0 +1,11 @@
+{
+  "skill": "gap-validate",
+  "run_id": "20260428T203533Z-bef712d3",
+  "candidates_evaluated": 3,
+  "selected": "gap-001",
+  "results": [
+    {"id": "gap-001", "name": "IFC slab CDT triangulation", "score": 0.884, "signals": 4, "families": 3, "tech_lines": 7, "verdict": "ACCEPTED"},
+    {"id": "gap-002", "name": "COG warp cache",              "score": 0.790, "signals": 3, "families": 2, "tech_lines": 7, "verdict": "ACCEPTED"},
+    {"id": "gap-003", "name": "Utility network simplification","score": 0.0,  "signals": 2, "families": 1, "tech_lines": 5, "verdict": "REJECTED"}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "skill": "gap-research",
+  "run_id": "20260428T203533Z-bef712d3",
+  "duration_s": 48,
+  "signals_found": {
+    "reddit": 8,
+    "github": 2,
+    "arxiv": 32,
+    "stackexchange": 0,
+    "websearch_supplement": 12
+  },
+  "note": "arXiv returned off-topic papers; supplemented with 8 targeted WebSearch queries across GIS/BIM topics"
+}

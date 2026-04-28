@@ -1,0 +1,10 @@
+{
+  "skill": "tool-publisher",
+  "run_id": "20260428T203533Z-bef712d3",
+  "repo": "daudee215/ifc-slab-mesh",
+  "repo_url": "https://github.com/daudee215/ifc-slab-mesh",
+  "release_url": "https://github.com/daudee215/ifc-slab-mesh/releases/tag/v0.1.0",
+  "tag": "v0.1.0",
+  "topics": ["ifc","bim","triangulation","gis","python","delaunay","ifcopenshell","mesh"],
+  "pushed_at": "2026-04-28T21:09:00Z"
+}
