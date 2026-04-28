@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ifc-slab-mesh — IFC Slab Triangulator</title>
+<meta name="description" content="Constrained triangulation of IFC slab footprints with opening subtraction. Python library and CLI — 201,810 triangles/s." />
+<meta property="og:title" content="ifc-slab-mesh" />
+<meta property="og:description" content="Constrained Delaunay triangulation of IFC slab footprints with opening subtraction." />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/earcut/2.2.4/earcut.min.js"></script>
+<style>
+:root {
+  --bg:       #0d1117;
+  --surface:  #161b22;
+  --surface2: #1c2128;
+  --border:   #30363d;
+  --accent:   #4493f8;
+  --accent2:  #79c0ff;
+  --text:     #e6edf3;
+  --muted:    #8b949e;
+  --success:  #3fb950;
+  --warn:     #d29922;
+  --danger:   #f85149;
+  --radius:   8px;
+  --mono:     'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+.logo svg { color: var(--accent); flex-shrink: 0; }
+.logo-name { font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
+.logo-tag {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-family: var(--mono);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 7px;
+}
+.header-links {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.pill:hover { border-color: var(--accent); background: rgba(68,147,248,.08); }
+.pill.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.pill.primary:hover { background: #2f81f7; }
+.badge-live { display:inline-flex;align-items:center;gap:5px;font-size:.75rem;color:var(--success); }
+.badge-live::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block;animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+
+/* ── Hero ── */
+.hero {
+  padding: 36px 24px 28px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 560px;
+}
+.stat-strip {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.stat-item { display:flex;flex-direction:column;gap:1px; }
+.stat-val { font-size:1.15rem;font-weight:700;font-family:var(--mono);color:var(--accent2); }
+.stat-lbl { font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em; }
+
+/* ── Main layout ── */
+main {
+  flex: 1;
+  padding: 0 24px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ── Demo presets ── */
+.presets {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.preset-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all .15s;
+}
+.preset-btn:hover { border-color: var(--accent); color: var(--text); }
+.preset-btn.active { border-color: var(--accent); background: rgba(68,147,248,.12); color: var(--accent2); }
+.upload-label {
+  margin-left: auto;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px dashed var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.upload-label:hover { border-color: var(--accent); color: var(--text); }
+#ifc-upload { display: none; }
+
+/* ── Canvas + sidebar ── */
+.demo-area {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .demo-area { grid-template-columns: 1fr; }
+}
+.canvas-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+#mesh-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+.canvas-label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  pointer-events: none;
+}
+.view-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+}
+.view-btn {
+  padding: 3px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: rgba(13,17,23,.8);
+  color: var(--muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.view-btn.active { border-color: var(--accent); color: var(--accent2); }
+
+/* ── Sidebar stats ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.stat-card-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(48,54,61,.5);
+  gap: 8px;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row-key { font-size: 0.78rem; color: var(--muted); }
+.stat-row-val { font-size: 0.82rem; font-family: var(--mono); color: var(--text); font-weight: 600; }
+.stat-row-val.good { color: var(--success); }
+.stat-row-val.warn { color: var(--warn); }
+
+/* quality bar */
+.qual-bar-wrap { margin-top: 6px; }
+.qual-bar-bg { background: var(--border); border-radius: 3px; height: 5px; overflow: hidden; }
+.qual-bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.legend-item { display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--muted); }
+.legend-swatch { width:12px;height:12px;border-radius:2px;border:1px solid rgba(255,255,255,.15); }
+
+/* ── Code snippet ── */
+.code-block {
+  margin-top: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.code-header-title { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+.copy-btn {
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all .15s;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--text); }
+pre {
+  padding: 16px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  tab-size: 4;
+}
+.kw  { color: #ff7b72; }
+.fn  { color: #d2a8ff; }
+.st  { color: #a5d6ff; }
+.cm  { color: #8b949e; font-style: italic; }
+.nu  { color: #79c0ff; }
+
+/* ── ADR link ── */
+.adr-strip {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+.adr-strip svg { color: var(--accent); flex-shrink: 0; }
+.adr-strip a { color: var(--accent2); text-decoration: none; }
+.adr-strip a:hover { text-decoration: underline; }
+.adr-muted { color: var(--muted); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+/* ── Upload feedback ── */
+.upload-feedback {
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 4px 0;
+  min-height: 20px;
+}
+.upload-feedback.ok  { color: var(--success); }
+.upload-feedback.err { color: var(--danger); }
+</style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <a class="logo" href="https://github.com/daudee215/ifc-slab-mesh" target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 3 22 20 2 20"/><line x1="12" y1="3" x2="7" y2="20"/>
+      <line x1="12" y1="3" x2="17" y2="20"/><line x1="2" y1="14" x2="22" y2="14"/>
+    </svg>
+    <span class="logo-name">ifc-slab-mesh</span>
+    <span class="logo-tag">v0.1.0</span>
+  </a>
+  <div class="header-links">
+    <span class="badge-live">live demo</span>
+    <a class="pill" href="https://github.com/daudee215/ifc-slab-mesh" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+    <a class="pill primary" href="https://github.com/daudee215/ifc-slab-mesh/releases/tag/v0.1.0" target="_blank" rel="noopener">Release</a>
+  </div>
+</header>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <h1>IFC slab <span>CDT</span> triangulator</h1>
+  <p>Parses <code>IfcSlab</code> footprints, subtracts <code>IfcOpeningElement</code> voids, and produces quality-constrained Delaunay meshes via Shewchuk's <em>triangle</em> library. Python API and CLI.</p>
+  <div class="stat-strip">
+    <div class="stat-item"><span class="stat-val">201,810</span><span class="stat-lbl">triangles / s</span></div>
+    <div class="stat-item"><span class="stat-val">45 / 45</span><span class="stat-lbl">tests pass</span></div>
+    <div class="stat-item"><span class="stat-val">0</span><span class="stat-lbl">CVEs</span></div>
+    <div class="stat-item"><span class="stat-val">MIT</span><span class="stat-lbl">license</span></div>
+  </div>
+</div>
+
+<!-- ── Demo ── -->
+<main>
+  <div class="presets">
+    <button class="preset-btn active" data-idx="0">Simple slab</button>
+    <button class="preset-btn" data-idx="1">Slab + opening</button>
+    <button class="preset-btn" data-idx="2">L-shaped slab</button>
+    <button class="preset-btn" data-idx="3">Complex (4 openings)</button>
+    <label class="upload-label" for="ifc-upload">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Upload .ifc
+    </label>
+    <input type="file" id="ifc-upload" accept=".ifc" />
+  </div>
+  <div id="upload-feedback" class="upload-feedback"></div>
+
+  <div class="demo-area">
+    <div class="canvas-wrap">
+      <canvas id="mesh-canvas" width="660" height="420"></canvas>
+      <div class="canvas-label" id="canvas-label">earcut CDT • browser preview</div>
+      <div class="view-toggle">
+        <button class="view-btn active" data-view="mesh">Mesh</button>
+        <button class="view-btn" data-view="boundary">Outline</button>
+        <button class="view-btn" data-view="quality">Quality</button>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="stat-card">
+        <div class="stat-card-title">Mesh statistics</div>
+        <div class="stat-row"><span class="stat-row-key">Triangles</span><span class="stat-row-val" id="s-tri">—</span></div>
+        <div class="stat-row"><span class="stat-row-key">Vertices</span><span class="stat-row-val" id="s-vert">—</span></div>
+        <div class="stat-row"><span class="stat-row-key">Area</span><span class="stat-row-val" id="s-area">—</span></div>
+        <div class="stat-row"><span class="stat-row-key">Openings</span><span class="stat-row-val" id="s-open">—</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">Quality</div>
+        <div class="stat-row"><span class="stat-row-key">Min angle</span><span class="stat-row-val" id="s-minang">—</span></div>
+        <div class="stat-row"><span class="stat-row-key">Mean angle</span><span class="stat-row-val" id="s-meanang">—</span></div>
+        <div class="stat-row"><span class="stat-row-key">Bad tris (&lt;20°)</span><span class="stat-row-val" id="s-bad">—</span></div>
+        <div class="qual-bar-wrap">
+          <div style="font-size:.7rem;color:var(--muted);margin-bottom:4px;">Mesh quality</div>
+          <div class="qual-bar-bg"><div class="qual-bar-fill" id="qual-bar" style="width:0%;background:var(--success)"></div></div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">Export targets</div>
+        <div class="stat-row"><span class="stat-row-key">OBJ</span><span class="stat-row-val good">✓</span></div>
+        <div class="stat-row"><span class="stat-row-key">PLY</span><span class="stat-row-val good">✓</span></div>
+        <div class="stat-row"><span class="stat-row-key">NPZ</span><span class="stat-row-val good">✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(68,147,248,.22);border-color:rgba(68,147,248,.5)"></div> Mesh triangles</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:transparent;border-color:#e6edf3"></div> Slab boundary</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(248,81,73,.15);border-color:#f85149"></div> Opening void</div>
+    <div class="legend-item" id="legend-quality" style="display:none"><div class="legend-swatch" style="background:linear-gradient(90deg,#3fb950,#d29922,#f85149)"></div> Quality (green=good)</div>
+  </div>
+
+  <!-- ── Code snippet ── -->
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-header-title">Python · ifc_slab_mesh</span>
+      <button class="copy-btn" id="copy-btn">Copy</button>
+    </div>
+    <pre id="code-pre"><span class="kw">from</span> ifc_slab_mesh <span class="kw">import</span> <span class="fn">triangulate_ifc_file</span>
+
+<span class="cm"># Parse slabs, subtract openings, run CDT</span>
+result = <span class="fn">triangulate_ifc_file</span>(<span class="st">"building.ifc"</span>)
+
+<span class="kw">for</span> name, mesh <span class="kw">in</span> result.meshes.items():
+    <span class="fn">print</span>(<span class="st">f"</span>{name}<span class="st">: </span>{mesh.faces.shape[<span class="nu">0</span>]}<span class="st"> triangles, </span>{mesh.area:<span class="nu">.1f</span>}<span class="st"> m²"</span>)
+
+<span class="cm"># CLI equivalent</span>
+<span class="cm"># ifc-slab-mesh building.ifc -o ./meshes --format obj</span></pre>
+  </div>
+
+  <!-- ── ADR strip ── -->
+  <div class="adr-strip">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    <div>
+      <span class="adr-muted">Why Shewchuk Triangle over CGAL, Earcut, or scipy? </span>
+      <a href="https://github.com/daudee215/ifc-slab-mesh/blob/main/docs/adr/0001-architecture.md" target="_blank" rel="noopener">Read ADR-0001 →</a>
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+  <span>ifc-slab-mesh v0.1.0 · MIT License · <a href="https://github.com/daudee215/ifc-slab-mesh" target="_blank" rel="noopener">github.com/daudee215/ifc-slab-mesh</a></span>
+  <span>Built by <a href="https://daudee.com" target="_blank" rel="noopener">Daud Tasleem</a> · <a href="https://daudee.com/#tools" target="_blank" rel="noopener">More tools</a></span>
+</footer>
+
+<script>
+'use strict';
+
+/* ── Demo geometry definitions (units: metres) ── */
+const DEMOS = [
+  {
+    name: 'Simple 10×6 m slab',
+    boundary: [[0,0],[10,0],[10,6],[0,6]],
+    holes: [],
+    area: 60,
+    openings: 0
+  },
+  {
+    name: '8×5 m slab + 2×2 m opening',
+    boundary: [[0,0],[8,0],[8,5],[0,5]],
+    holes: [[[3,2],[5,2],[5,4],[3,4]]],
+    area: 36,
+    openings: 1
+  },
+  {
+    name: 'L-shaped slab (12 m²)',
+    boundary: [[0,0],[4,0],[4,2],[2,2],[2,4],[0,4]],
+    holes: [],
+    area: 12,
+    openings: 0
+  },
+  {
+    name: 'Complex slab + 4 voids',
+    boundary: [[0,0],[14,0],[14,8],[10,8],[10,10],[0,10]],
+    holes: [
+      [[1,1],[3,1],[3,3],[1,3]],
+      [[5,1],[7,1],[7,3],[5,3]],
+      [[9,1],[11,1],[11,3],[9,3]],
+      [[2,6],[6,6],[6,9],[2,9]]
+    ],
+    area: 106,
+    openings: 4
+  }
+];
+
+/* ── State ── */
+let currentDemo = DEMOS[0];
+let currentView = 'mesh';
+let triangles   = [];
+let allVerts    = [];
+let animFrame   = null;
+let animProg    = 0;
+
+/* ── Triangulation using earcut ── */
+function buildEarcutInput(boundary, holes) {
+  const verts = [];
+  const holeIdx = [];
+  for (const [x,y] of boundary) verts.push(x, y);
+  for (const hole of holes) {
+    holeIdx.push(verts.length / 2);
+    for (const [x,y] of hole) verts.push(x, y);
+  }
+  return { verts, holeIdx };
+}
+
+function triangulate(demo) {
+  const { verts, holeIdx } = buildEarcutInput(demo.boundary, demo.holes);
+  const idx = earcut(verts, holeIdx.length ? holeIdx : null, 2);
+  const tris = [];
+  for (let i = 0; i < idx.length; i += 3) {
+    tris.push([
+      [verts[idx[i]*2],   verts[idx[i]*2+1]],
+      [verts[idx[i+1]*2], verts[idx[i+1]*2+1]],
+      [verts[idx[i+2]*2], verts[idx[i+2]*2+1]]
+    ]);
+  }
+  return { tris, verts };
+}
+
+/* ── Quality metrics ── */
+function triMinAngle(tri) {
+  const [[ax,ay],[bx,by],[cx,cy]] = tri;
+  const a = Math.hypot(cx-bx, cy-by);
+  const b = Math.hypot(cx-ax, cy-ay);
+  const c = Math.hypot(bx-ax, by-ay);
+  const A = Math.acos(Math.max(-1, Math.min(1, (b*b+c*c-a*a)/(2*b*c))));
+  const B = Math.acos(Math.max(-1, Math.min(1, (a*a+c*c-b*b)/(2*a*c))));
+  const C = Math.PI - A - B;
+  return Math.min(A, B, C) * 180 / Math.PI;
+}
+
+function qualityColor(angle, alpha=0.22) {
+  // green (≥30°) → yellow (20°) → red (<15°)
+  const t = Math.min(1, Math.max(0, (angle - 10) / 25));
+  const r = Math.round(63 + (1-t)*185);
+  const g = Math.round(t > 0.5 ? 185 : t*2*185);
+  const b = 80;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/* ── Viewport transform ── */
+function makeTransform(demo, W, H, pad=40) {
+  const pts = [demo.boundary, ...demo.holes].flat();
+  const xs = pts.map(p=>p[0]), ys = pts.map(p=>p[1]);
+  const minX=Math.min(...xs), maxX=Math.max(...xs);
+  const minY=Math.min(...ys), maxY=Math.max(...ys);
+  const dw = maxX-minX || 1, dh = maxY-minY || 1;
+  const scale = Math.min((W-pad*2)/dw, (H-pad*2)/dh);
+  const ox = (W - dw*scale)/2 - minX*scale;
+  const oy = (H - dh*scale)/2 - minY*scale;
+  return ([x,y]) => [x*scale+ox, H - (y*scale+oy)]; // flip Y for canvas
+}
+
+/* ── Draw ── */
+function draw() {
+  const canvas = document.getElementById('mesh-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const demo = currentDemo;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#161b22';
+  ctx.fillRect(0, 0, W, H);
+
+  const pt = makeTransform(demo, W, H);
+  const n = Math.ceil(triangles.length * animProg);
+
+  if (currentView !== 'boundary') {
+    // Draw triangles
+    for (let i = 0; i < n; i++) {
+      const tri = triangles[i];
+      const [a, b, c] = tri.map(pt);
+      const ang = triMinAngle(tri);
+
+      let fillColor, strokeColor;
+      if (currentView === 'quality') {
+        fillColor  = qualityColor(ang, 0.4);
+        strokeColor = qualityColor(ang, 0.9);
+      } else {
+        fillColor  = 'rgba(68,147,248,0.13)';
+        strokeColor = 'rgba(68,147,248,0.55)';
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.lineTo(c[0], c[1]);
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+    }
+  }
+
+  // Draw boundary
+  function drawPoly(verts, color, width, fillColor) {
+    const mapped = verts.map(pt);
+    ctx.beginPath();
+    ctx.moveTo(mapped[0][0], mapped[0][1]);
+    for (let i=1;i<mapped.length;i++) ctx.lineTo(mapped[i][0], mapped[i][1]);
+    ctx.closePath();
+    if (fillColor) { ctx.fillStyle = fillColor; ctx.fill(); }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.stroke();
+  }
+
+  if (currentView === 'boundary') {
+    drawPoly(demo.boundary, '#e6edf3', 1.5, 'rgba(230,237,243,0.04)');
+  } else {
+    drawPoly(demo.boundary, 'rgba(230,237,243,0.7)', 1.5);
+  }
+
+  for (const hole of demo.holes) {
+    drawPoly(hole, '#f85149', 1.5, 'rgba(248,81,73,0.1)');
+  }
+
+  // Vertex dots on boundary view
+  if (currentView === 'boundary') {
+    ctx.fillStyle = '#4493f8';
+    for (const v of demo.boundary) {
+      const [px, py] = pt(v);
+      ctx.beginPath();
+      ctx.arc(px, py, 3.5, 0, Math.PI*2);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#f85149';
+    for (const hole of demo.holes) {
+      for (const v of hole) {
+        const [px, py] = pt(v);
+        ctx.beginPath();
+        ctx.arc(px, py, 3, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+  }
+}
+
+/* ── Stats update ── */
+function updateStats(demo, tris) {
+  const angles = tris.map(triMinAngle);
+  const minAng  = angles.length ? Math.min(...angles) : 0;
+  const meanAng = angles.length ? angles.reduce((a,b)=>a+b,0)/angles.length : 0;
+  const badCount = angles.filter(a=>a<20).length;
+
+  // Unique vertex count (rough)
+  const vset = new Set();
+  for (const tri of tris) for (const [x,y] of tri) vset.add(`${x.toFixed(4)},${y.toFixed(4)}`);
+
+  document.getElementById('s-tri').textContent   = tris.length.toLocaleString();
+  document.getElementById('s-vert').textContent  = vset.size.toLocaleString();
+  document.getElementById('s-area').textContent  = demo.area + ' m²';
+  document.getElementById('s-open').textContent  = demo.openings;
+
+  const minEl  = document.getElementById('s-minang');
+  const badEl  = document.getElementById('s-bad');
+  minEl.textContent  = minAng.toFixed(1) + '°';
+  minEl.className    = 'stat-row-val ' + (minAng >= 20 ? 'good' : 'warn');
+  document.getElementById('s-meanang').textContent = meanAng.toFixed(1) + '°';
+  badEl.textContent  = badCount;
+  badEl.className    = 'stat-row-val ' + (badCount === 0 ? 'good' : 'warn');
+
+  const quality = Math.min(100, Math.max(0, (minAng / 30) * 100));
+  const bar = document.getElementById('qual-bar');
+  bar.style.width = quality + '%';
+  bar.style.background = quality > 66 ? 'var(--success)' : quality > 33 ? 'var(--warn)' : 'var(--danger)';
+}
+
+/* ── Animation ── */
+function animate(duration=600) {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  animProg = 0;
+  const start = performance.now();
+  function step(now) {
+    animProg = Math.min(1, (now - start) / duration);
+    draw();
+    if (animProg < 1) animFrame = requestAnimationFrame(step);
+    else animFrame = null;
+  }
+  animFrame = requestAnimationFrame(step);
+}
+
+/* ── Load demo ── */
+function loadDemo(demo) {
+  currentDemo = demo;
+  const result = triangulate(demo);
+  triangles = result.tris;
+  allVerts  = result.verts;
+  updateStats(demo, triangles);
+  document.getElementById('canvas-label').textContent =
+    `earcut CDT · ${triangles.length} triangles · ${demo.name}`;
+  animate(500);
+}
+
+/* ── IFC upload parser ── */
+function parseIFC(text) {
+  // Extract IFCCARTESIANPOINT entities
+  const points = {};
+  const ptRe = /#(\d+)\s*=\s*IFCCARTESIANPOINT\s*\(\s*\(\s*([\d.\-Ee,\s]+)\s*\)\s*\)/gi;
+  let m;
+  while ((m = ptRe.exec(text)) !== null) {
+    const coords = m[2].split(',').map(s => parseFloat(s.trim()));
+    points['#' + m[1]] = coords;
+  }
+
+  // Extract IFCPOLYLINE
+  const polylines = {};
+  const plRe = /#(\d+)\s*=\s*IFCPOLYLINE\s*\(\s*\(\s*((?:#\d+\s*,?\s*)+)\s*\)\s*\)/gi;
+  while ((m = plRe.exec(text)) !== null) {
+    const ids = m[2].match(/#\d+/g) || [];
+    polylines['#' + m[1]] = ids
+      .map(id => points[id])
+      .filter(Boolean)
+      .map(c => [c[0]/1000, c[1]/1000]); // mm → m
+  }
+
+  // Extract IFCRECTANGLEPROFILEDEF → xdim, ydim
+  const rectProfiles = {};
+  const rpRe = /#(\d+)\s*=\s*IFCRECTANGLEPROFILEDEF\s*\([^)]+?,\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/gi;
+  while ((m = rpRe.exec(text)) !== null) {
+    const w = parseFloat(m[2]) / 1000, h = parseFloat(m[3]) / 1000;
+    const hw = w/2, hh = h/2;
+    rectProfiles['#' + m[1]] = [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]];
+  }
+
+  // Find any profile boundary
+  let boundary = null;
+  for (const id in rectProfiles) { boundary = rectProfiles[id]; break; }
+  if (!boundary) for (const id in polylines) { if (polylines[id].length >= 3) { boundary = polylines[id]; break; } }
+
+  return boundary;
+}
+
+/* ── Preset buttons ── */
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadDemo(DEMOS[parseInt(btn.dataset.idx)]);
+    document.getElementById('upload-feedback').textContent = '';
+    document.getElementById('upload-feedback').className = 'upload-feedback';
+  });
+});
+
+/* ── View toggle ── */
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentView = btn.dataset.view;
+    const legendQ = document.getElementById('legend-quality');
+    legendQ.style.display = currentView === 'quality' ? 'flex' : 'none';
+    animProg = 1;
+    draw();
+  });
+});
+
+/* ── IFC upload ── */
+document.getElementById('ifc-upload').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const fb = document.getElementById('upload-feedback');
+  fb.textContent = 'Parsing…';
+  fb.className = 'upload-feedback';
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const text = ev.target.result;
+    const boundary = parseIFC(text);
+    if (!boundary || boundary.length < 3) {
+      fb.textContent = 'Could not extract slab geometry. Ensure the IFC contains IfcSlab with IfcRectangleProfileDef or IfcPolyline.';
+      fb.className = 'upload-feedback err';
+      return;
+    }
+    // Compute area (shoelace)
+    let area = 0;
+    for (let i=0,j=boundary.length-1;i<boundary.length;j=i++) {
+      area += boundary[j][0]*boundary[i][1] - boundary[i][0]*boundary[j][1];
+    }
+    area = Math.abs(area) / 2;
+    const custom = { name: file.name, boundary, holes: [], area: parseFloat(area.toFixed(2)), openings: 0 };
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    fb.textContent = `Loaded: ${file.name} — ${boundary.length} vertices, area ≈ ${area.toFixed(1)} m²`;
+    fb.className = 'upload-feedback ok';
+    loadDemo(custom);
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+/* ── Copy button ── */
+document.getElementById('copy-btn').addEventListener('click', () => {
+  const code = `from ifc_slab_mesh import triangulate_ifc_file\n\nresult = triangulate_ifc_file("building.ifc")\n\nfor name, mesh in result.meshes.items():\n    print(f"{name}: {mesh.faces.shape[0]} triangles, {mesh.area:.1f} m²")\n\n# CLI equivalent\n# ifc-slab-mesh building.ifc -o ./meshes --format obj`;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1800);
+  });
+});
+
+/* ── Responsive canvas resize ── */
+function resizeCanvas() {
+  const canvas = document.getElementById('mesh-canvas');
+  const wrap = canvas.parentElement;
+  const ratio = canvas.height / canvas.width;
+  canvas.style.height = (wrap.clientWidth * ratio) + 'px';
+}
+
+/* ── Init ── */
+loadDemo(DEMOS[0]);
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); draw(); });
+</script>
+</body>
+</html>
