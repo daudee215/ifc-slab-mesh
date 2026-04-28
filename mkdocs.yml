@@ -1,0 +1,10 @@
+site_name: ifc-slab-mesh
+site_url: https://daudee215.github.io/ifc-slab-mesh/
+repo_url: https://github.com/daudee215/ifc-slab-mesh
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - ADR: adr/0001-architecture.md
+  - Roadmap: roadmap.md
+docs_dir: docs

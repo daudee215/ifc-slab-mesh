@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "ifc-slab-mesh: Constrained Delaunay Triangulation for IFC Slab Geometries"
+authors:
+  - family-names: Tasleem
+    given-names: Daud
+    email: daudtasleem215@gmail.com
+version: "0.1.0"
+date-released: "2026-04-28"
+url: "https://github.com/daudee215/ifc-slab-mesh"
+repository-code: "https://github.com/daudee215/ifc-slab-mesh"
+license: MIT
+keywords:
+  - ifc
+  - bim
+  - triangulation
+  - constrained-delaunay
+  - geospatial
+  - mesh
