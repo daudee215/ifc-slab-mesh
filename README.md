@@ -2,7 +2,7 @@
 
 **Constraint-preserving Delaunay triangulation of IFC slab geometries.**
 
-`ifc-slab-mesh` parses Industry Foundation Classes (IFC) files, extracts `IfcSlab` boundary profiles and associated `IfcOpeningElement` hole polygons, and produces watertight triangular meshes using Shewchuk's constrained Delaunay triangulation — the only Python tool that correctly respects slab opening boundaries.
+`ifc-slab-mesh` parses Industry Foundation Classes (IFC) files, extracts `IfcSlab` boundary profiles and associated `IfcOpeningElement` hole polygons, and produces watertight triangular meshes using Shewchuk's constrained Delaunay triangulation - the only Python tool that correctly respects slab opening boundaries.
 
 ---
 
@@ -13,7 +13,7 @@ Given an IFC file containing structural slabs:
 1. Parses `IfcSlab` elements and their `IfcRelVoidsElement` → `IfcOpeningElement` voids.
 2. Extracts 2-D boundary profiles (rectangle, arbitrary polyline, circle).
 3. Projects to a slab-local coordinate plane.
-4. Applies **constrained Delaunay triangulation** with interior hole support — no output edge crosses an opening boundary.
+4. Applies **constrained Delaunay triangulation** with interior hole support - no output edge crosses an opening boundary.
 5. Back-projects to world-frame 3-D coordinates.
 6. Exports to OBJ, PLY, or NPZ.
 
@@ -25,12 +25,12 @@ Existing open-source IFC geometry tools have a critical limitation:
 
 - **IfcOpenShell's geometry module** triangulates slabs but ignores opening boundaries. Edges from `IfcOpeningElement` are not treated as triangle constraints. The resulting mesh contains triangles that span openings, making it invalid for structural analysis, FEA, and BIM-to-3DTiles pipelines.
 - **CGAL's 3D Constrained Triangulations** (CGAL 6.1, 2025) solves the mathematical problem but has no Python bindings and no IFC awareness.
-- **Mapbox Earcut** is fast but does not honour user-defined segment constraints — openings are approximated but not correctly enforced.
+- **Mapbox Earcut** is fast but does not honour user-defined segment constraints - openings are approximated but not correctly enforced.
 
 Source signals:
-- [IfcOpenShell issue #733](https://github.com/IfcOpenShell/IfcOpenShell/issues/733) — `DISABLE_TRIANGULATION` indicates fragility in the existing triangulator
-- [CGAL 3D Constrained Triangulations announcement](https://www.cgal.org/2025/06/30/Constrained_triangulation_3/) — confirms 3D CDT was an unsolved open problem until 2025; no Python port exists
-- [Parallel computing-based online geometry triangulation for BIM (ScienceDirect, 2019)](https://www.sciencedirect.com/science/article/abs/pii/S0926580518308781) — cites absence of open Python tooling for constraint-aware slab meshing
+- [IfcOpenShell issue #733](https://github.com/IfcOpenShell/IfcOpenShell/issues/733) - `DISABLE_TRIANGULATION` indicates fragility in the existing triangulator
+- [CGAL 3D Constrained Triangulations announcement](https://www.cgal.org/2025/06/30/Constrained_triangulation_3/) - confirms 3D CDT was an unsolved open problem until 2025; no Python port exists
+- [Parallel computing-based online geometry triangulation for BIM (ScienceDirect, 2019)](https://www.sciencedirect.com/science/article/abs/pii/S0926580518308781) - cites absence of open Python tooling for constraint-aware slab meshing
 
 `ifc-slab-mesh` fills this gap: it is the **only pip-installable Python library that produces constrained Delaunay meshes for IFC slabs, correctly honouring opening boundaries**.
 
@@ -81,7 +81,7 @@ triangulate_slabs(slabs, quality=True, min_angle=20.0, max_area=None)
 
 ## Benchmark
 
-Benchmark on 200 synthetic slabs (5–40 m sides, 0–3 openings each), Python 3.12, Apple M3:
+Benchmark on 200 synthetic slabs (5-40 m sides, 0-3 openings each), Python 3.12, Apple M3:
 
 | Metric | Result |
 |---|---|
